@@ -1,0 +1,761 @@
+<data>
+	<role id="1" name="Employé" description="Les employés du refuge"/>
+	
+	<user firstName="Léon" lastName="Dupont" email="leon.dupont@gmail.com" phone="081/451256" password="wtf"/>
+	<user firstName="Jules" lastName="Vanhamme" email="jules.vanhamme@hotmail.com" phone="081/745621" />
+	<user firstName="Robert" lastName="Jarnidieu" email="robert.jarnidieu@gmail.com" />
+	<user firstName="Antonin" lastName="Lepneu" email="a.lepneu@gmail.com" />
+	<user firstName="Aimé" lastName="Desbaistes" email="aime.desbaistes@gmail.com" />
+	<user firstName="Ange" lastName="Oliver" email="ange.oliver@gmail.com" />
+	<user firstName="René" lastName="Taupin" email="rene.taupin@gmail.com" />
+	<user firstName="Luc" lastName="Occident" email="luc.occident@gmail.com" />
+	<user firstName="Lucas" lastName="Faipopaux" email="lucas.faipopaux@gmail.com" />
+	<user firstName="Innocent" lastName="Milosevic" email="innocent.milosevic@gmail.com" />
+
+	<user firstName="Suzette" lastName="Dupont" email="suzette.dupont@gmail.com" />
+	<user firstName="Laura" lastName="Lorapa" email="laura.lorapa@gmail.com" />
+	<user firstName="Leonie" lastName="Brecheneuve" email="leonie.brecheneuve@gmail.com" />
+	<user firstName="Mélusine" lastName="Alharay" email="m.alharay@gmail.com" />
+	<user firstName="Ida" lastName="Zapata" email="ida.zapata@gmail.com" />
+	<user firstName="Ada" lastName="Lovelace" email="ada.lovelace@gmail.com" />
+	<user firstName="Laura" lastName="Kasdemerder" email="L.kasdemerder@gmail.com" />
+	<user firstName="Sarah" lastName="Cuspote" email="sarah.cuspote@gmail.com" />
+	<user firstName="Salomé" lastName="Togo" email="salome.togo@gmail.com" />
+	<user firstName="Salomé" lastName="Gatroy" email="salome.gatroy@gmail.com" />
+
+	<user firstName="Jacques" lastName="Shiraz" email="jacques.shiraz@gmail.com" active="false"/>
+	<user firstName="Georges" lastName="Pompiliou" email="g.pompiliou@hotmailfr" phone="00334567812" active="false"/>
+	<user firstName="Valérian" lastName="Ricard de Tours" email="ricard.de.toursg@gmx.com" phone="" active ="false"/>
+	<user firstName="Vincent" lastName="Mariole" email="bogossdu39@gmail.com" phone="" active ="false"/>
+
+	<user firstName="" lastName="" email="" phone="" password=""/>
+	<user firstName="" lastName="" email="" phone="" password=""/>
+	<user firstName="" lastName="" email="" phone="" password=""/>
+	<user firstName="" lastName="" email="" phone="" password=""/>
+	<user firstName="" lastName="" email="" phone="" password=""/>
+	<user firstName="" lastName="" email="" phone="" password=""/>
+	
+	
+	
+
+	<color name="blanche"/>
+	<color name="noire"/>
+	<color name="brune"/>
+	<color name="grise"/>
+	<color name="rousse"/>
+
+	<color name="rouge"/>
+	<color name="orange"/>
+	<color name="jaune"/>
+	<color name="verte"/>
+	<color name="bleue"/>
+	<color name="indigo"/>
+	<color name="violette"/>
+
+	<color name="multicolore"/>
+	<color name="bizarre"/>
+
+	<!-- robes chevaux -->
+	<color name="alezane"/>
+	<color name="café au lait"/>
+	<color name="baie"/>
+	<color name="palomino"/>
+	<color name="isabelle"/>
+	<color name="souris"/>
+	<color name="aubère"/>
+	<color name="louvette"/>
+	<color name="rouanne"/>
+	<color name="pie"/>
+
+	<color name=""/>
+	<color name=""/>
+	<color name=""/>
+
+	<species name="Chien">
+		<race name="Affenpinscher">
+		</race>
+		<race name="Airedale Terrier">
+		</race>
+		<race name="Akita Américain">
+		</race>
+		<race name="Akita Inu">
+		</race>
+		<race name="American Staffordshire Terrier">
+		</race>
+		<race name="Ancien chien d'arrêt danois">
+		</race>
+		<race name="Anglo-Français de Petite Vènerie">
+		</race>
+		<race name="Ariégeois">
+		</race>
+		<race name="Barbet">
+		</race>
+		<race name="Barbu Tchèque">
+		</race>
+		<race name="Barzoï">
+		</race>
+		<race name="Basenji">
+		</race>
+		<race name="Basset Artésien-Normand">
+		</race>
+		<race name="Basset Bleu de Gascogne">
+		</race>
+		<race name="Basset de Westphalie">
+		</race>
+		<race name="Basset des Alpes">
+		</race>
+		<race name="Basset Fauve de Bretagne">
+		</race>
+		<race name="Basset Hound">
+		</race>
+		<race name="Beagle">
+		</race>
+		<race name="Beagle-Harrier">
+		</race>
+		<race name="Bearded Collie">
+		</race>
+		<race name="Beauceron">
+		</race>
+		<race name="Bedlington Terrier">
+		</race>
+		<race name="Berger Allemand">
+			<animal name="Angela" sex="f" birth="2013"/>
+			<animal name="Helmut" sex="m" birth="2014"/>
+			<animal name="Beethoven" birth="2008"/>
+			<animal name="Schubert" birth="2009"/>
+			<animal name="Schumann" birth="2008"/>
+			<animal name="Wolfram" birth="2012"/>
+			<animal name="Panzer" birth="2011"/>
+			<animal name="Sauerkraut" birth="2008"/>
+			<animal name="Neanderthal" />
+			<animal name="Berliner" />
+		</race>
+		<race name="Berger Australien">
+		</race>
+		<race name="Berger Belge Groenendael">
+		</race>
+		<race name="Berger Belge Laekenois">
+		</race>
+		<race name="Berger Belge Malinois">
+		</race>
+		<race name="Berger Belge Tervueren">
+		</race>
+		<race name="Berger Blanc Suisse">
+		</race>
+		<race name="Berger Catalan">
+		</race>
+		<race name="Berger d'Anatolie">
+		</race>
+		<race name="Berger d'Asie Centrale">
+		</race>
+		<race name="Berger de Bergame">
+		</race>
+		<race name="Berger de Bohême">
+		</race>
+		<race name="Berger de Brie">
+		</race>
+		<race name="Berger de l'Atlas">
+		</race>
+		<race name="Berger de Maremme et des Abruzzes">
+		</race>
+		<race name="Berger de Picardie">
+		</race>
+		<race name="Berger de Russie">
+		</race>
+		<race name="Berger des Pyrénées">
+		</race>
+		<race name="Berger des Shetland">
+		</race>
+		<race name="Berger du Caucase">
+		</race>
+		<race name="Berger du massif du Karst">
+		</race>
+		<race name="Berger finnois de Laponie">
+		</race>
+		<race name="Berger Hollandais">
+		</race>
+		<race name="Berger Islandais">
+		</race>
+		<race name="Berger Polonais de Plaine">
+		</race>
+		<race name="Berger Polonais de Podhale">
+		</race>
+		<race name="Berger Portugais">
+		</race>
+		<race name="Berger Yougoslave">
+		</race>
+		<race name="Bichon à poil frisé">
+		</race>
+		<race name="Bichon Bolonais">
+		</race>
+		<race name="Bichon Havanais">
+		</race>
+		<race name="Bichon Maltais">
+		</race>
+		<race name="Biewer Yorkshire">
+		</race>
+		<race name="Billy">
+		</race>
+		<race name="Bobtail">
+		</race>
+		<race name="Boerbull">
+		</race>
+		<race name="Border Collie">
+		</race>
+		<race name="Border Terrier">
+		</race>
+		<race name="Boston Terrier">
+		</race>
+		<race name="Bouledogue Américain">
+		</race>
+		<race name="Bouledogue Français">
+		</race>
+		<race name="Bouvier Australien">
+		</race>
+		<race name="Bouvier Bernois">
+		</race>
+		<race name="Bouvier d'Appenzell">
+		</race>
+		<race name="Bouvier de l'Entlebuch">
+		</race>
+		<race name="Bouvier des Ardennes">
+		</race>
+		<race name="Bouvier des Flandres">
+		</race>
+		<race name="Boxer">
+		</race>
+		<race name="Brachet Allemand">
+		</race>
+		<race name="Brachet autrichien noir et feu">
+		</race>
+		<race name="Brachet de Styrie à poil dur">
+		</race>
+		<race name="Brachet Polonais">
+		</race>
+		<race name="Brachet Tyrolien">
+		</race>
+		<race name="Braque allemand à poil court">
+		</race>
+		<race name="Braque allemand à poil dur">
+		</race>
+		<race name="Braque d'Auvergne">
+		</race>
+		<race name="Braque de Burgos">
+		</race>
+		<race name="Braque de l'Ariège">
+		</race>
+		<race name="Braque de Weimar">
+		</race>
+		<race name="Braque du Bourbonnais">
+		</race>
+		<race name="Braque Français">
+		</race>
+		<race name="Braque Hongrois à poil court">
+		</race>
+		<race name="Braque hongrois à poil dur">
+		</race>
+		<race name="Braque Italien">
+		</race>
+		<race name="Braque Saint-Germain">
+		</race>
+		<race name="Bull Terrier">
+		</race>
+		<race name="Bulldog Anglais">
+		</race>
+		<race name="Bullmastiff">
+		</race>
+		<race name="Cairn Terrier">
+		</race>
+		<race name="Cane Corso">
+		</race>
+		<race name="Caniche">
+			<animal name="Tony" desc="Travailliste" birth=""/>
+			<animal name="Elisabeth" sex="f" birth="2001"/>
+			<animal name="Fabiola" sex="f"/>
+			<animal name="Mathilde" sex="f"/>
+			<animal name="Baudouin" adoptable="false" sterilized="true" birth="xyz no plantage"/>
+			<animal name="Leopold" desc="Vraiment moche"/>
+		</race>
+		<race name="Cao de Castro Laboreiro">
+		</race>
+		<race name="Carlin">
+		</race>
+		<race name="Cavalier King Charles Spaniel">
+		</race>
+		<race name="Chien chinois à crête">
+		</race>
+		<race name="Chien courant Finnois">
+		</race>
+		<race name="Chien d'eau américain">
+		</race>
+		<race name="Chien d'eau irlandais">
+		</race>
+		<race name="Chien d'Eau Portugais">
+		</race>
+		<race name="Chien de Canaan">
+		</race>
+		<race name="Chien de montagne des Pyrénées">
+		</race>
+		<race name="Chien de montagne portugais">
+		</race>
+		<race name="Chien de Saint Hubert">
+		</race>
+		<race name="Chien du pharaon">
+		</race>
+		<race name="Chien d’Élan Norvégien Noir">
+		</race>
+		<race name="Chien Finnois de Laponie">
+		</race>
+		<race name="Chien Loup de Saarloos">
+		</race>
+		<race name="Chien Loup Tchécoslovaque">
+		</race>
+		<race name="Chien suédois de Laponie">
+		</race>
+		<race name="Chihuahua">
+		</race>
+		<race name="Chow Chow">
+		</race>
+		<race name="Clumber-Spaniel">
+		</race>
+		<race name="Cocker Américain">
+		</race>
+		<race name="Cocker Anglais">
+			<animal name="Bill" color="rousse"/>
+		</race>
+		<race name="Colley à poil court">
+		</race>
+		<race name="Colley à poil long">
+		</race>
+		<race name="Coton de Tuléar">
+		</race>
+		<race name="Curly Coated Retriever">
+		</race>
+		<race name="Cursinu">
+		</race>
+		<race name="Dalmatien">
+		</race>
+		<race name="Dandie-Dinmont-Terrier">
+		</race>
+		<race name="Dobermann">
+		</race>
+		<race name="Dogo Canario">
+		</race>
+		<race name="Dogue Allemand">
+		</race>
+		<race name="Dogue Argentin">
+		</race>
+		<race name="Dogue de Bordeaux">
+		</race>
+		<race name="Dogue de Majorque">
+		</race>
+		<race name="Dogue du Tibet">
+		</race>
+		<race name="English Toy Terrier">
+		</race>
+		<race name="Epagneul Breton">
+		</race>
+		<race name="Epagneul de Pont-Audemer">
+		</race>
+		<race name="Epagneul Français">
+		</race>
+		<race name="Epagneul Japonais">
+		</race>
+		<race name="Epagneul Nain Continental">
+		</race>
+		<race name="Epagneul Picard">
+		</race>
+		<race name="Epagneul Tibétain">
+		</race>
+		<race name="Eurasier">
+		</race>
+		<race name="Field-Spaniel">
+		</race>
+		<race name="Fila Brasileiro">
+		</race>
+		<race name="Flat-Coated Retriever">
+		</race>
+		<race name="Fox Terrier">
+		</race>
+		<race name="Foxhound anglais">
+		</race>
+		<race name="Golden Retriever">
+		</race>
+		<race name="Grand Basset Griffon vendéen">
+		</race>
+		<race name="Grand Bouvier Suisse">
+		</race>
+		<race name="Greyhound">
+		</race>
+		<race name="Griffon Belge">
+		</race>
+		<race name="Griffon Bruxellois">
+		</race>
+		<race name="Griffon Korthals">
+		</race>
+		<race name="Griffon Nivernais">
+		</race>
+		<race name="Hovawart">
+		</race>
+		<race name="Husky Sibérien">
+		</race>
+		<race name="Irish Terrier">
+		</race>
+		<race name="Jack Russell Terrier">
+		</race>
+		<race name="Kelpie">
+		</race>
+		<race name="King Charles Spaniel">
+		</race>
+		<race name="Kishu">
+		</race>
+		<race name="Komondor">
+		</race>
+		<race name="Labrador Retriever">
+			<animal name="Labracadabra" />
+			<animal name="Labrasif" />
+		</race>
+		<race name="Lakeland Terrier">
+		</race>
+		<race name="Landseer">
+		</race>
+		<race name="Leonberger">
+		</race>
+		<race name="Lhassa Apso">
+		</race>
+		<race name="Malamute de l'Alaska">
+		</race>
+		<race name="Mastiff">
+		</race>
+		<race name="Mâtin de Naples">
+		</race>
+		<race name="Norfolk Terrier">
+		</race>
+		<race name="Norwich-Terrier">
+		</race>
+		<race name="Parson Russell Terrier">
+		</race>
+		<race name="Pékinois">
+		</race>
+		<race name="Petit Brabançon">
+		</race>
+		<race name="Petit Chien Lion">
+		</race>
+		<race name="Pinscher">
+		</race>
+		<race name="Pinscher Nain">
+		</race>
+		<race name="Pitbull">
+		</race>
+		<race name="Pointer Anglais">
+		</race>
+		<race name="Ratonero Bodeguero Andaluz">
+		</race>
+		<race name="Rhodesian-Ridgeback">
+		</race>
+		<race name="Rottweiler">
+		</race>
+		<race name="Saint-Bernard">
+		</race>
+		<race name="Samoyède">
+		</race>
+		<race name="Schnauzer">
+		</race>
+		<race name="Setter Anglais">
+		</race>
+		<race name="Setter Gordon">
+		</race>
+		<race name="Setter Irlandais Rouge">
+		</race>
+		<race name="Shar-Pei">
+		</race>
+		<race name="Shiba-Inu">
+		</race>
+		<race name="Shih Tzu">
+		</race>
+		<race name="Smous des Pays-Bas">
+		</race>
+		<race name="Spitz Allemand">
+		</race>
+		<race name="Spitz Japonais">
+		</race>
+		<race name="Springer Anglais">
+		</race>
+		<race name="Staffordshire Bull Terrier">
+		</race>
+		<race name="Sussex-Spaniel">
+		</race>
+		<race name="Teckel">
+		</race>
+		<race name="Terre Neuve">
+		</race>
+		<race name="Terrier Ecossais">
+		</race>
+		<race name="Terrier Noir Russe">
+		</race>
+		<race name="Terrier Tibétain">
+		</race>
+		<race name="Tosa">
+		</race>
+		<race name="Welsh Corgi Cardigan">
+		</race>
+		<race name="Welsh Corgi Pembroke">
+		</race>
+		<race name="West Highland White Terrier">
+		</race>
+		<race name="Whippet">
+		</race>
+		<race name="Yorkshire Terrier">
+		</race>
+	</species>
+
+	<species name="Chat">
+		<race name="Abyssin">
+		</race>
+		<race name="American Bobtail">
+		</race>
+		<race name="American Curl">
+		</race>
+		<race name="American Shortair">
+		</race>
+		<race name="American Wirehair">
+		</race>
+		<race name="Angora Turc">
+			<animal name="Angular" sex="f" />
+		</race>
+		<race name="Balinais">
+		</race>
+		<race name="Bengal">
+		</race>
+		<race name="Bleu Russe">
+		</race>
+		<race name="Bombay">
+		</race>
+		<race name="British Shorthair">
+		</race>
+		<race name="Burmese">
+		</race>
+		<race name="Burmilla">
+		</race>
+		<race name="Ceylan">
+		</race>
+		<race name="Chartreux">
+		</race>
+		<race name="Chausie">
+		</race>
+		<race name="Cornish Rex">
+		</race>
+		<race name="Devon Rex">
+		</race>
+		<race name="Donskoy">
+		</race>
+		<race name="Européen">
+		</race>
+		<race name="Exotic">
+		</race>
+		<race name="German Rex">
+		</race>
+		<race name="Havana Brown">
+		</race>
+		<race name="Japanese Bobtail">
+		</race>
+		<race name="Javanais">
+		</race>
+		<race name="Korat">
+		</race>
+		<race name="Kurilian Bobtail">
+		</race>
+		<race name="LaPerm">
+		</race>
+		<race name="Maine Coon">
+			<animal name="Coen" />
+		</race>
+		<race name="Manx">
+		</race>
+		<race name="Mau Egyptien">
+		</race>
+		<race name="Munchkin">
+		</race>
+		<race name="Norvégien">
+		</race>
+		<race name="Ocicat">
+		</race>
+		<race name="Oriental">
+		</race>
+		<race name="Persan">
+		</race>
+		<race name="Peterbald">
+		</race>
+		<race name="Pixie-Bob">
+		</race>
+		<race name="Ragdoll">
+		</race>
+		<race name="Sacré de Birmanie">
+		</race>
+		<race name="Savannah">
+		</race>
+		<race name="Scottish &amp; Highland">
+		</race>
+		<race name="Scottish Fold">
+		</race>
+		<race name="Siamois">
+		</race>
+		<race name="Sibérien">
+		</race>
+		<race name="Singapura">
+		</race>
+		<race name="Skogcatt">
+		</race>
+		<race name="Snowshoe">
+		</race>
+		<race name="Somali">
+		</race>
+		<race name="Sphynx">
+		</race>
+		<race name="Thaï">
+		</race>
+		<race name="Tiffany">
+		</race>
+		<race name="Tonkinois">
+		</race>
+		<race name="Toyger">
+		</race>
+		<race name="Turc de Van">
+		</race>
+	</species>
+	
+	
+	<species name="Cheval">
+	
+		<race name="Appaloosa">
+		</race>
+		<race name="Barbe">
+		</race>
+		<race name="Breton">
+			<animal name="Un Bras de Kerfaro" color="rouan"/>
+			<animal name="Solo des Ronderais" color="rouan"/>
+		</race>
+		<race name="Camargue">
+		</race>
+		<race name="Frison">
+		</race>
+		<race name="Holstein">
+		</race>
+		<race name="Islandais">
+		</race>
+		<race name="Lipizzan">
+		</race>
+		<race name="Lusitanien">
+		</race>
+		<race name="Mérens">
+			<animal name=""/>
+		</race>
+		<race name="Mustang">
+		</race>
+		<race name="Paint Horse">
+		</race>
+		<race name="Percheron">
+		</race>
+		<race name="Przewalski">
+		</race>
+		<race name="Pure Race Espagnole (Andalou)">
+		</race>
+		<race name="Pur-sang anglais">
+		</race>
+		<race name="Pur-sang arabe">
+		</race>
+		<race name="Quater-Horse">
+		</race>
+		<race name="Selle français">
+		</race>
+		<race name="Shire">
+		</race>
+		<race name="Trotteur">
+		</race>
+		<race name="">
+		</race>
+		<race name="">
+		</race>
+		
+		<!-- poneys -->
+		<race name="Connemara">
+		</race>
+		<race name="Fjord">
+		</race>
+		<race name="Haflinger">
+		</race>
+		<race name="Highland">
+		</race>
+		<race name="New-Forrest">
+		</race>
+		<race name="Poney de selle français">
+		</race>
+		<race name="Pottok">
+		</race>
+		<race name="Welsh">
+		</race>
+		<race name="Welsh Cob">
+		</race>
+		<race name="Shetland">
+		</race>
+		
+	</species>
+	
+	<species name="Âne">
+		<animal name="Jacques" />
+		<animal name="Martin" />
+		<animal name="Morelli" sex="f"/>
+		<animal name="Al"/>
+		<animal name="Murphy"/>
+	</species>
+	
+	<species name="Hamster"/>
+	<species name="Lapin"/>
+	<species name="Souris"/>
+	<species name="Rat"/>
+	<species name="Furet"/>
+	<species name="Fouine"/>
+	<species name="Cochon d'Inde"/>
+	<species name="Chinchilla"/>
+	<species name="Octodon"/>
+	<species name="Gerbille"/>
+
+	<species name="Perroquet"/>
+	<species name="Perruche"/>
+	<species name="Ara"/>
+	<species name="Canari"/>
+	<species name="Poule"/>
+	<species name="Canard"/>
+	
+	<species name="Mouette Rieuse">
+		<animal name="Juliette" sex="f"/>
+		<animal name="Roméo"/>
+		<animal name="Mouette Rieuse"/>
+	</species>
+
+	<species name="Tortue">
+		<animal name="Caroline" sex="f" color="verte">
+			<contact-request firstName="MC" lastName="Solaar" email="mc.solaar@gmail.com" message="Je suis l'as de trèfle qui pique son cœur."/>
+			<contact-request firstName="Neil" lastName="Diamond" email="neil.diamond@gmail.com" message="Sweet Caroline, Good times never seemed so good"/>
+			<contact-request firstName="Sophie" lastName="Durant" email="sophie.durant@gmail.com" message="Elle est à moi."/>
+		</animal>
+		<animal name="Leonardo" color="verte"/>
+		<animal name="Donatello" color="verte"/>
+		<animal name="Raphael" color="verte"/>
+	</species>
+	
+	<species name="Poisson rouge">
+		<animal name="Bubulle" color="rouge">
+			<contact-request firstName="Roger" lastName="Dupont" email="roger.dupont@hotmail.com" phone="082/457812" message="Je suis très intéressé par ce poisson rouge."/>
+			<contact-request firstName="Sophie" lastName="Durant" email="sophie.durant@gmail.com" message="Quel merveilleux poisson rouge ! Contactez moi de toute urgence."/>
+			<contact-request firstName="Jean" lastName="Aymard" email="jean_aymard@gmail.com" message="Bubulle ! Bubulle !"/>
+		</animal>
+	</species>
+
+	<species name="Python"/>
+	<species name="Boa"/>
+	<species name="Iguane"/>
+	<species name=""/>
+	<species name=""/>
+
+</data>
