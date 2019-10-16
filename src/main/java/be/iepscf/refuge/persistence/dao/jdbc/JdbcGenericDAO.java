@@ -72,6 +72,8 @@ public class JdbcGenericDAO<E, ID extends Serializable> implements GenericDAO<E,
 		return null;
 	}
 
+
+
 	public void closeConnection() {
 		if (connection != null) {
 			try {
