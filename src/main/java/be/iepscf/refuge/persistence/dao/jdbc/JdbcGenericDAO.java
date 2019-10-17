@@ -80,6 +80,7 @@ public class JdbcGenericDAO<E, ID extends Serializable> implements GenericDAO<E,
 		if (connection != null) {
 			try {
 				connection.close();
+				connection = null;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
