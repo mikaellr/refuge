@@ -64,6 +64,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
                 }
             }
             preparedStatement.close();
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,6 +91,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
                 //response = true ;
             }
             preparedStatement.close();
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,6 +108,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
             preparedStatement.setLong(1, user.getId());
             affectedRows = preparedStatement.executeUpdate();
             preparedStatement.close();
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -129,6 +132,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
                 //response = true ;
             }
             preparedStatement.close();
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -168,6 +172,8 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
             if (resultSet.next()) {
                 user = fetch(resultSet);
             }
+            preparedStatement.close();
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -186,6 +192,8 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
                 User user = fetch(resultSet);
                 users.add(user);
             }
+            preparedStatement.close();
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -203,12 +211,12 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
             if (resultSet.next()) {
                 return fetch(resultSet);
             }
+            preparedStatement.close();
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-
-
 
 }
