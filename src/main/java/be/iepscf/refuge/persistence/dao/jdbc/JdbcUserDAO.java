@@ -75,7 +75,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
             if (affectedRows > 0) {
                 //response = true ;
             }
-            preparedStatement.close();//?Problème avec le closeConnection() dans le JUnit
+            closeConnection();//?Problème avec le closeConnection() dans le JUnit
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -165,6 +165,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
             if (resultSet.next()) {
                 user = fetch(resultSet);
             }
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -183,6 +184,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
                 User user = fetch(resultSet);
                 users.add(user);
             }
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -200,6 +202,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
             if (resultSet.next()) {
                 return fetch(resultSet);
             }
+            closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
