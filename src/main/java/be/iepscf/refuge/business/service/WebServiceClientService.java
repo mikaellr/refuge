@@ -29,7 +29,7 @@ public class WebServiceClientService {
 
     public List<User> getUsers()  {
         Client client = ClientBuilder.newClient( new ClientConfig());
-        WebTarget webTarget = client.target(targetUrl).path("user");
+        WebTarget webTarget = client.target(targetUrl).path("users");
         Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
         Response resp = invocationBuilder.get();
         List<User> users = resp.readEntity(new GenericType<List<User>>() {});
@@ -38,7 +38,7 @@ public class WebServiceClientService {
 
     public User getUser(Long id)  {
         Client client = ClientBuilder.newClient( new ClientConfig());
-        WebTarget webTarget = client.target(targetUrl).path("user").path(id.toString());
+        WebTarget webTarget = client.target(targetUrl).path("users").path(id.toString());
         //WebTarget helloworldWebTargetWithQueryParam =                webTarget.queryParam("greeting", "Hi World!");
 
         Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
@@ -53,7 +53,7 @@ public class WebServiceClientService {
     public long saveUser(User user) {
 
         Client client = ClientBuilder.newClient( new ClientConfig());
-        WebTarget webTarget = client.target(targetUrl).path("user");
+        WebTarget webTarget = client.target(targetUrl).path("users");
 
         Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.post(Entity.entity(user, MediaType.APPLICATION_JSON));
@@ -66,7 +66,7 @@ public class WebServiceClientService {
 
     public long updateUser(User user) {
         Client client = ClientBuilder.newClient( new ClientConfig());
-        WebTarget webTarget = client.target(targetUrl).path("user").path(user.getId().toString());
+        WebTarget webTarget = client.target(targetUrl).path("users").path(user.getId().toString());
 
         Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.put(Entity.entity(user, MediaType.APPLICATION_JSON));
@@ -78,7 +78,7 @@ public class WebServiceClientService {
 
     public long deleteUser(User user) {
         Client client = ClientBuilder.newClient( new ClientConfig());
-        WebTarget webTarget = client.target(targetUrl).path("user").path(user.getId().toString());
+        WebTarget webTarget = client.target(targetUrl).path("users").path(user.getId().toString());
 
         Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.delete();
