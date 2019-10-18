@@ -17,7 +17,7 @@ public class UserServlet extends
     // affichage formulaire edit du user
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = getParameter(request, "id");
-        User user = ServiceFactory.getPublicService().getUser(id);
+        User user = ServiceFactory.getGestionService().getUser(id);
         if (user == null) {
             send404(request, response, String.format("User# not found", id));
             return;
@@ -33,7 +33,7 @@ public class UserServlet extends
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         Long id = getParameter(request, "id");
-        User user = ServiceFactory.getEmployeService().updateUser(id, firstName, lastName, email, phone);
+        User user = ServiceFactory.getGestionService().updateUser(id, firstName, lastName, email, phone);
         sendRedirect(response, "/gestion/users");
     }
 

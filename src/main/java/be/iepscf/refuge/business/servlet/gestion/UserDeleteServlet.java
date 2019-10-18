@@ -15,7 +15,7 @@ public class UserDeleteServlet extends
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = getParameter(request, "id");
-        ServiceFactory.getEmployeService().deleteUser(id);
+        ServiceFactory.getGestionService().deleteUser(id);
         sendRedirect(response, "/gestion/users");
     }
 

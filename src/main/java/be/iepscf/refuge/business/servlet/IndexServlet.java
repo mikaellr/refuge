@@ -14,6 +14,7 @@ import be.iepscf.refuge.business.businessbean.Color;
 import be.iepscf.refuge.business.businessbean.Species;
 import be.iepscf.refuge.business.businessbean.User;
 import be.iepscf.refuge.business.service.PublicService;
+import be.iepscf.refuge.business.service.ServiceFactory;
 
 /**
  * Servlet implementation class IndexServlet
@@ -34,9 +35,9 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PublicService publicService = new PublicService();
+		PublicService publicService = ServiceFactory.getPublicService();;
 		List<Animal> animals = publicService.getAnimals();
-		List<User> users = publicService.getUsers();
+		List<User> users = ServiceFactory.getGestionService().getUsers();
 		List<Species> species = publicService.getSpecies();
 		List<Color> colors = publicService.getColors();
 		request.setAttribute("animals", animals);

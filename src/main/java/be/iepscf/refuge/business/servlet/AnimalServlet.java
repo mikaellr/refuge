@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import be.iepscf.refuge.business.businessbean.Animal;
-import be.iepscf.refuge.business.service.EmployeService;
+import be.iepscf.refuge.business.service.GestionService;
 
 /**
  * Servlet implementation class AnimalServlet
@@ -40,7 +40,7 @@ public class AnimalServlet extends BaseServlet {
 		if (pId != null) {
 			try {
 				Long id = Long.parseLong(pId);
-				EmployeService es = new EmployeService();
+				GestionService es = new GestionService();
 				Animal animal = es.getAnimal(id);
 				if (animal != null) {
 					request.setAttribute("animal", animal);

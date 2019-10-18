@@ -15,7 +15,7 @@ public class UserDeactivateServlet extends
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = getParameter(request, "id");
-        ServiceFactory.getEmployeService().deactivateUser(id);
+        ServiceFactory.getGestionService().deactivateUser(id);
         sendRedirect(response, "/gestion/users");
     }
 

@@ -1,285 +1,120 @@
 package be.iepscf.refuge.business.service;
 
 import be.iepscf.refuge.business.businessbean.*;
-import be.iepscf.refuge.persistence.service.BeanService;
+import be.iepscf.refuge.business.util.PasswordManager;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
-/***
- * @TODO supprimer le couplage à la couche persistence (BeanService)
- */
 public class PublicService {
 
-	private BeanService beanService;
-	private WebServiceClientService webServiceClientService;
+	private ModelService _modelService = new ModelService();
+	private PasswordManager _passwordManager;
 
-	public BeanService getBeanService() {
-		if (beanService == null) {
-			beanService = new BeanService();
+	protected PasswordManager getPasswordManager() {
+		if (_passwordManager == null) {
+			_passwordManager = new PasswordManager();
 		}
-		return beanService;
+		return _passwordManager;
 	}
 
-	public WebServiceClientService getWebServiceClientService() {
-		if (webServiceClientService == null) {
-			webServiceClientService = new WebServiceClientService();
+	protected ModelService getModelService() {
+		return _modelService;
+	}
+
+
+
+
+
+
+	public User login(String email, String password)  {
+		User user = getModelService().getUserByEmail(email);
+		if (user == null) {
+			System.err.println("login: user not found by email");
 		}
-		return webServiceClientService;
-	}
-
-
-
-
-
-	/* conversion des EntityBeans en Businessbeans et vice-versa */
-
-	public Role conv(be.iepscf.refuge.persistence.entitybean.Role src) {
-		if (src == null) return null;
-		return new Role(src.getId(), src.getName(), src.getDescription());
-	}
-
-	public be.iepscf.refuge.persistence.entitybean.Role conv(Role src) {
-		if (src == null) return null;
-		return new be.iepscf.refuge.persistence.entitybean.Role(src.getId(), src.getName(), src.getDescription());
-	}
-
-	public User conv(be.iepscf.refuge.persistence.entitybean.User src) {
-		if (src == null) return null;
-		return new User(src.getId(), src.getFirstName(), src.getLastName(), src.getEmail(), src.getPhone(), src.getHash(), src.getSalt(), src.isActive(), conv(src.getRole()));
-	}
-
-	public be.iepscf.refuge.persistence.entitybean.User conv(User src) {
-		if (src == null) return null;
-		return new be.iepscf.refuge.persistence.entitybean.User(src.getId(), src.getFirstName(), src.getLastName(), src.getEmail(), src.getPhone(), src.getHash(), src.getSalt(), src.isActive(), conv(src.getRole()));
-	}
-
-	public List<User> convUsers(List<be.iepscf.refuge.persistence.entitybean.User> srcs) {
-		if (srcs == null) return null;
-		List<User> items = new ArrayList<User>();
-		for (be.iepscf.refuge.persistence.entitybean.User src : srcs) {
-			items.add(conv(src));
+		if (getPasswordManager().checkUserPassword(user, password)) {
+			return user;
+		} else {
+			System.err.println("login: password check failed");
 		}
-		return items;
-	}
-
-	public Species conv(be.iepscf.refuge.persistence.entitybean.Species src) {
-		if (src == null) return null;
-		return new Species(src.getId(), src.getName());
-	}
-
-	public be.iepscf.refuge.persistence.entitybean.Species conv(Species src) {
-		if (src == null) return null;
-		return new be.iepscf.refuge.persistence.entitybean.Species(src.getId(), src.getName());
-	}
-
-	public List<Species> convSpecies(List<be.iepscf.refuge.persistence.entitybean.Species> srcs) {
-		if (srcs == null) return null;
-		List<Species> items = new ArrayList<Species>();
-		for (be.iepscf.refuge.persistence.entitybean.Species src : srcs) {
-			items.add(conv(src));
-		}
-		return items;
-	}
-
-	public Race conv(be.iepscf.refuge.persistence.entitybean.Race src) {
-		if (src == null) return null;
-		return new Race(src.getId(), src.getName(), conv(src.getSpecies()));
-	}
-
-	public be.iepscf.refuge.persistence.entitybean.Race conv(Race src) {
-		if (src == null) return null;
-		return new be.iepscf.refuge.persistence.entitybean.Race(src.getId(), src.getName(), conv(src.getSpecies()));
-	}
-
-	public List<Race> convRaces(List<be.iepscf.refuge.persistence.entitybean.Race> srcs) {
-		if (srcs == null) return null;
-		List<Race> items = new ArrayList<Race>();
-		for (be.iepscf.refuge.persistence.entitybean.Race src : srcs) {
-			items.add(conv(src));
-		}
-		return items;
-	}
-
-	public Color conv(be.iepscf.refuge.persistence.entitybean.Color src) {
-		if (src == null) return null;
-		return new Color(src.getId(), src.getName());
-	}
-
-	public be.iepscf.refuge.persistence.entitybean.Color conv(Color src) {
-		if (src == null) return null;
-		return new be.iepscf.refuge.persistence.entitybean.Color(src.getId(), src.getName());
-	}
-
-	public List<Color> convColor(List<be.iepscf.refuge.persistence.entitybean.Color> srcs) {
-		if (srcs == null) return null;
-		List<Color> items = new ArrayList<Color>();
-		for (be.iepscf.refuge.persistence.entitybean.Color src : srcs) {
-			items.add(conv(src));
-		}
-		return items;
-	}
-
-	public Animal conv(be.iepscf.refuge.persistence.entitybean.Animal src) {
-		if (src == null) return null;
-		Animal item = new Animal();
-		item.setId(src.getId());
-		item.setName(src.getName());
-		item.setDescription(src.getDescription());
-		item.setBirthYear(src.getBirthYear());
-		item.setSex(src.getSex());
-		item.setSterilized(src.isSterilized());
-		item.setPhotoContentType(src.getPhotoContentType());
-		item.setPhotoContentLength(src.getPhotoContentLength());
-		item.setPhoto(src.getPhoto());
-		item.setSpecies(conv(src.getSpecies()));
-		item.setRace(conv(src.getRace()));
-		item.setColor(conv(src.getColor()));
-		return item;
-	}
-
-	public be.iepscf.refuge.persistence.entitybean.Animal conv(Animal src) {
-		if (src == null) return null;
-		be.iepscf.refuge.persistence.entitybean.Animal item = new be.iepscf.refuge.persistence.entitybean.Animal();
-		item.setId(src.getId());
-		item.setName(src.getName());
-		item.setDescription(src.getDescription());
-		item.setBirthYear(src.getBirthYear());
-		item.setSex(src.getSex());
-		item.setSterilized(src.isSterilized());
-		item.setPhotoContentType(src.getPhotoContentType());
-		item.setPhotoContentLength(src.getPhotoContentLength());
-		item.setPhoto(src.getPhoto());
-		item.setSpecies(conv(src.getSpecies()));
-		item.setRace(conv(src.getRace()));
-		item.setColor(conv(src.getColor()));
-		return item;
-	}
-
-	public List<Animal> convAnimals(List<be.iepscf.refuge.persistence.entitybean.Animal> srcs) {
-		if (srcs == null) return null;
-		List<Animal> items = new ArrayList<Animal>();
-		for (be.iepscf.refuge.persistence.entitybean.Animal src : srcs) {
-			items.add(conv(src));
-		}
-		return items;
-	}
-
-
-	public ContactRequest conv(be.iepscf.refuge.persistence.entitybean.ContactRequest src) {
-		if (src == null) return null;
-		return new ContactRequest(src.getId(), src.getFirstName(), src.getLastName(), src.getEmail(), src.getPhone(), src.getMessage(), src.getDate(), src.isTreated(), conv(src.getAnimal()));
-	}
-
-	public be.iepscf.refuge.persistence.entitybean.ContactRequest conv(ContactRequest src) {
-		if (src == null) return null;
-		return new be.iepscf.refuge.persistence.entitybean.ContactRequest(src.getId(), src.getFirstName(), src.getLastName(), src.getEmail(), src.getPhone(), src.getMessage(), src.getDate(), src.isTreated(), conv(src.getAnimal()));
-	}
-
-	public List<ContactRequest> convContactRequests(List<be.iepscf.refuge.persistence.entitybean.ContactRequest> srcs) {
-		if (srcs == null) return null;
-		List<ContactRequest> items = new ArrayList<ContactRequest>();
-		for (be.iepscf.refuge.persistence.entitybean.ContactRequest src : srcs) {
-			items.add(conv(src));
-		}
-		return items;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/* User : accès en lecture */
-
-	public User getUser(Long id) {
-		return getWebServiceClientService().getUser(id);
-	}
-
-	public List<User> getUsers() {
-		return getWebServiceClientService().getUsers();
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-	public Role getRole(Long id) {
-		return conv(getBeanService().getRole(id));
-	}
-
-	public List<Role> getRoles() {
 		return null;
 	}
 
 
 
+
 	public Species getSpecies(Long id) {
-		return conv(getBeanService().getSpecies(id));
+		return getModelService().getSpecies(id);
 	}
 
 	public Species getSpecies(String name) {
-		return conv(getBeanService().getSpeciesByName(name));
+		return getModelService().getSpecies(name);
 	}
 
 	public List<Species> getSpecies() {
-		return convSpecies(getBeanService().getSpecies());
+		return getModelService().getSpecies();
 	}
 
 
 
 	public Race getRace(Long id) {
-		return conv(getBeanService().getRace(id));
+		return getModelService().getRace(id);
 	}
 
 	public List<Race> getRaces() {
-		return convRaces(getBeanService().getRaces());
+		return getModelService().getRaces();
 	}
 
+	public List<Race> getRacesBySpecies(Species species) {
+		return getModelService().getRaces();
+	}
 
 
 
 	public List<Color> getColors() {
-		return convColor(getBeanService().getColors());
+		return getModelService().getColors();
 	}
 
 
 
 
 	public Animal getAnimal(Long id) {
-		return conv(getBeanService().getAnimal(id));
+		return getModelService().getAnimal(id);
 	}
 
 	public List<Animal> getAnimals() {
-		return convAnimals(getBeanService().getAnimals());
+		return getModelService().getAnimals();
+	}
+
+	public List<Animal> getAnimalsQuery(Species species, Race race, long offset, long limit, boolean last, boolean adoptable, boolean all) {
+		return getModelService().getAnimalsQuery(species, race, offset, limit, last, adoptable, all);
+	}
+
+	public List<Animal> getAnimalsQuery(long species, long race, long offset, long limit, boolean last, boolean adoptable, boolean all) {
+		return getModelService().getAnimalsQuery(species, race, offset, limit, last, adoptable, all);
 	}
 
 
 
 
-
-    public ContactRequest getContactRequests(Long id) {
-        return conv(beanService.getContactRequest(id));
+	public ContactRequest getContactRequests(Long id) {
+        return getModelService().getContactRequest(id);
     }
 
     public List<ContactRequest> getContactRequests() {
-        return convContactRequests(beanService.getContactRequests());
+        return getModelService().getContactRequests();
     }
 
+	public ContactRequest addContactRequest(String firstName, String lastName, String email, String phone, String message, long animalId) {
+		Animal animal = getAnimal(animalId);
+		if (animal == null) {
+			System.err.println("animal not found");
+			// créer des exceptions...
+			return null;
+		}
+		ContactRequest contactRequest = new ContactRequest(null, firstName, lastName, email, phone, message, new Date(), false, animal);
+		long lastInsertId = getModelService().saveContactRequest(contactRequest);
+		return contactRequest;
+	}
 }

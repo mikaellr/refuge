@@ -1,15 +1,11 @@
 package be.iepscf.refuge.business.servlet.gestion;
 
-import be.iepscf.refuge.business.businessbean.Role;
 import be.iepscf.refuge.business.businessbean.User;
 import be.iepscf.refuge.business.service.ServiceFactory;
-import be.iepscf.refuge.business.service.WebServiceClientService;
 import be.iepscf.refuge.business.servlet.BaseServlet;
-import be.iepscf.refuge.business.util.PasswordManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,7 +16,7 @@ public class UserListServlet extends BaseServlet {
 
     // liste des users
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<User> users = ServiceFactory.getPublicService().getUsers();
+        List<User> users = ServiceFactory.getGestionService().getUsers();
         request.setAttribute("users", users);
         request.getRequestDispatcher("/WEB-INF/jsp/gestion/users.jsp").forward(request, response);
     }
@@ -33,7 +29,7 @@ public class UserListServlet extends BaseServlet {
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         String confirm = request.getParameter("confirm");
-        User user = ServiceFactory.getEmployeService().addUser(firstName, lastName, email, phone, password, confirm);
+        User user = ServiceFactory.getGestionService().addUser(firstName, lastName, email, phone, password, confirm);
         sendRedirect(response, "/gestion/users");
     }
 

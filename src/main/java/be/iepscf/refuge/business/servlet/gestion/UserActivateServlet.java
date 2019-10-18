@@ -1,6 +1,5 @@
 package be.iepscf.refuge.business.servlet.gestion;
 
-import be.iepscf.refuge.business.businessbean.User;
 import be.iepscf.refuge.business.service.ServiceFactory;
 import be.iepscf.refuge.business.servlet.BaseServlet;
 
@@ -16,7 +15,7 @@ public class UserActivateServlet extends
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = getParameter(request, "id");
-        ServiceFactory.getEmployeService().activateUser(id);
+        ServiceFactory.getGestionService().activateUser(id);
         sendRedirect(response, "/gestion/users");
     }
 

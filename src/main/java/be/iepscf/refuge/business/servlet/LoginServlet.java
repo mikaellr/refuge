@@ -1,7 +1,7 @@
 package be.iepscf.refuge.business.servlet;
 
 import be.iepscf.refuge.business.businessbean.User;
-import be.iepscf.refuge.business.service.EmployeService;
+import be.iepscf.refuge.business.service.GestionService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +45,7 @@ public class LoginServlet extends BaseServlet {
 		String pPassword = request.getParameter("password");
 		if (pEmail != null && pPassword != null) {
 			System.out.println(String.format("email=%s, password=%s", pEmail, pPassword));
-			EmployeService es = new EmployeService();
+			GestionService es = new GestionService();
 			User user = es.login(pEmail, pPassword);
 			if (user != null) {
 				request.getSession().setAttribute("user", user);

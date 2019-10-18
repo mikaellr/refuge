@@ -3,7 +3,7 @@ package be.iepscf.refuge.business.service;
 public class ServiceFactory {
 
     protected static PublicService publicService;
-    protected static EmployeService employeService;
+    protected static GestionService gestionService;
 
     public static PublicService getPublicService() {
         if (publicService == null) {
@@ -12,11 +12,11 @@ public class ServiceFactory {
         return publicService;
     }
 
-    public static EmployeService getEmployeService() {
-        if (employeService == null) {
-            employeService = new EmployeService();
+    public static GestionService getGestionService() {
+        if (gestionService == null) {
+            gestionService = new GestionService();
         }
-        return employeService;
+        return gestionService;
     }
 
 }
