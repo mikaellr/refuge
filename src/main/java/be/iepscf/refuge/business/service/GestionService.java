@@ -6,7 +6,9 @@ import be.iepscf.refuge.business.util.PasswordManager;
 
 import java.util.List;
 
-
+/**
+ * méthodes nécessaires à
+ */
 public class GestionService extends PublicService {
 
 

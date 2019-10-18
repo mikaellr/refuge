@@ -1,27 +1,29 @@
 package be.iepscf.refuge.business.servlet;
 
-import java.io.IOException;
+import be.iepscf.refuge.business.businessbean.Animal;
+import be.iepscf.refuge.business.businessbean.Race;
+import be.iepscf.refuge.business.businessbean.Species;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import be.iepscf.refuge.business.businessbean.Animal;
-import be.iepscf.refuge.business.service.PublicService;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Servlet implementation class PhotoServlet
  */
-@WebServlet("/photo")
-public class PhotoServlet extends PublicServlet {
+@WebServlet("/races")
+public class RacesServlet extends PublicServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PhotoServlet() {
+    public RacesServlet() {
         super();
     }
 
@@ -32,16 +34,18 @@ public class PhotoServlet extends PublicServlet {
 		String idString = request.getParameter("id");
 		if (idString != null) {
 			Long id = Long.parseLong(idString);
-			Animal animal = getPublicService().getAnimal(id);
-			if (animal != null) {
-				byte[] content = animal.getPhoto();
-				String contentType = animal.getPhotoContentType();
-				if (content != null && content.length > 0 && contentType != null && contentType.length() > 0) {
-					response.setContentType(contentType);
-					response.getOutputStream().write(content);
-					return;
-				}
-			}
+			Species species = getPublicService().getSpecies(id);
+			List<Race> races = getPublicService().getRacesBySpecies(species);
+
+			for (Race item : races ) System.out.println(item);
+			System.out.println(races.size());
+			Gson gson = new Gson();
+			String json = gson.toJson(races);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.setStatus(200);
+			response.getWriter().write(json);
+			return;
 		}
 		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		response.getWriter().println("Not Found");

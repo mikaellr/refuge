@@ -6,7 +6,11 @@ import be.iepscf.refuge.business.util.PasswordManager;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * méthodes nécessaires aux actions "public" ou "visiteur"  (non connecté)
+ *
+ * à appeler depuis les servlets
+ */
 public class PublicService {
 
 	private ModelService _modelService = new ModelService();
@@ -67,7 +71,7 @@ public class PublicService {
 	}
 
 	public List<Race> getRacesBySpecies(Species species) {
-		return getModelService().getRaces();
+		return getModelService().getRacesBySpecies(species);
 	}
 
 

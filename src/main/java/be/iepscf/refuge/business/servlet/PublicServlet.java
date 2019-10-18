@@ -1,5 +1,8 @@
 package be.iepscf.refuge.business.servlet;
 
+import be.iepscf.refuge.business.service.PublicService;
+import be.iepscf.refuge.business.service.ServiceFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +13,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-@WebServlet(name = "BaseServlet")
-public class BaseServlet extends HttpServlet {
+/**
+ * servlet abstraite de base pour toutes les servlets servant de contrôlleur à une action visiteur (utilisateur non connecté)
+ *
+ * Fournit la méthode getPublicService() pour accéder au service PublicService proposant les accès au modéle et la logique métier
+ * nécessaire au fonctionnement de la partie publique du site
+ */
+@WebServlet(name = "PublicServlet")
+public abstract class PublicServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -19,6 +28,12 @@ public class BaseServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+
+
+    public PublicService getPublicService() {
+        return ServiceFactory.getPublicService();
     }
 
 
@@ -40,7 +55,7 @@ public class BaseServlet extends HttpServlet {
         return Long.parseLong(request.getParameter("id"));
     }
 
-    /* récupère contenu textuel d'une URL, si besoin pour requètes artisanales sans framework */
+    /* récupère contenu textuel d'une URL, si besoin pour requêtes artisanales sans framework */
     public String retrieve(String url) throws IOException {
         StringBuffer textResponse = new StringBuffer(100);
         URL realUrl = new URL(url);

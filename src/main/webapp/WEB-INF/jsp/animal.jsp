@@ -1,16 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Refuge</title>
-<link rel="stylesheet" href="<c:url value = "/css/refuge.proto.css"/>" />
-</head>
-<body>
-
-<jsp:include page="menu.jsp"/>
 
 
 <h2>Animal ${animal.name}</h2>
@@ -31,6 +18,3 @@
 </ul>
 
 
-
-
-</html>

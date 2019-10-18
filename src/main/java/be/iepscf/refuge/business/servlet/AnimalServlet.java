@@ -15,7 +15,7 @@ import be.iepscf.refuge.business.service.GestionService;
  * Servlet implementation class AnimalServlet
  */
 @WebServlet("/animal")
-public class AnimalServlet extends BaseServlet {
+public class AnimalServlet extends PublicServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
