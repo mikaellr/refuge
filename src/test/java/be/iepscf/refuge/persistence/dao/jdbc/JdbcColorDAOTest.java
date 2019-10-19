@@ -10,8 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JdbcColorDAOTest {
 
-
-
     @Test
     void testFind() {
         Long id = 1L;

@@ -1,6 +1,7 @@
 package be.iepscf.refuge.persistence.dao.jdbc;
 
 import be.iepscf.refuge.persistence.entitybean.Race;
+import be.iepscf.refuge.persistence.entitybean.Species;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -9,8 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JdbcRaceDAOTest {
-
-
 
     @Test
     void testFind() {
@@ -24,10 +23,22 @@ class JdbcRaceDAOTest {
     @Test
     void testFindAll() {
         JdbcRaceDAO dao = new JdbcRaceDAO();
-        List<Race> Races  = dao.findAll();
-        assertTrue(Races.size() > 0);
-        for (Race item : Races) {
+        List<Race> races  = dao.findAll();
+        assertTrue(races.size() > 0);
+        for (Race item : races) {
             assertTrue(item instanceof Race);
+        }
+    }
+
+    @Test
+    void testFindBySpecies() {
+        Long idChat = 2L;
+        Species chat = (new JdbcSpeciesDAO()).find(idChat);
+        JdbcRaceDAO dao = new JdbcRaceDAO();
+        List<Race> races  = dao.findBySpecies(chat);
+        assertTrue(races.size() > 0);
+        for (Race item : races) {
+            assertEquals(item.getSpecies().getId(), chat.getId());
         }
     }
 
