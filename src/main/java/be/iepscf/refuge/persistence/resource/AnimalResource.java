@@ -23,7 +23,6 @@ public class AnimalResource extends BaseResource {
     }
 
     /**
-     * @todo redondance cyclique species > races > species > ...
      * @return
      */
     @GET
@@ -35,4 +34,16 @@ public class AnimalResource extends BaseResource {
     }
 
 
+    /*@GET
+    @Path("/{key}")
+    public Response getEmployee(@PathParam("key") int key) {
+
+        if (employeesRepository.containsKey(key)) {
+
+            return Response.ok(employeesRepository.get(key)).build();
+        } else {
+
+            return Response.status(404).build();
+        }
+    }*/
 }

@@ -18,24 +18,13 @@ public class JdbcSpeciesDAO extends JdbcGenericDAO<Species, Long> implements Spe
     private static final String FIND_ALL = SELECT + " ORDER BY name";
 
     // De Creation/Update/Obsolescence :
-    private static final String INSERT = "INSERT INTO users " +
-            "(first_name, last_name, email, phone, hash, salt, `active`, fk_role) " +
-            "VALUES (?,?,?,?,?,?,?,?);";
+    private static final String INSERT = "INSERT INTO species " +
+            "(`name`) " +
+            "VALUES (?);";
 
-    private static final String UPDATE = "UPDATE `users` SET " +
-            "`first_name` = ?, " +
-            "`last_name` = ?, " +
-            "`email` = ?, " +
-            "`phone` = ?, " +
-            "`hash` = ?, " +
-            "`salt` = ?, " +
-            "`active` = ?, " +
-            "`fk_role` = ? " +
-            "WHERE `id` = ?;";
+    private static final String UPDATE = "UPDATE `species` SET `name` = ? WHERE `id` = ?";
 
     private static final String DISABLE = "UPDATE users SET active = false WHERE id =?";
-
-
 
     @Override
     public long save(Species item){
@@ -72,9 +61,9 @@ public class JdbcSpeciesDAO extends JdbcGenericDAO<Species, Long> implements Spe
             preparedStatement.setString(1, item.getName());
             preparedStatement.setLong(2, item.getId());
             affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows > 0) {
-                //response = true ;
-            }
+            //if (affectedRows > 0) {
+            //response = true ;
+            //}
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,11 +96,11 @@ public class JdbcSpeciesDAO extends JdbcGenericDAO<Species, Long> implements Spe
             e.printStackTrace();
         }
         return item;
-    };
+    }
 
     @Override
     public List<Species> findAll() {
-        List<Species> items = new ArrayList<Species>();
+        List<Species> items = new ArrayList<>();
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
@@ -124,7 +113,7 @@ public class JdbcSpeciesDAO extends JdbcGenericDAO<Species, Long> implements Spe
             e.printStackTrace();
         }
         return items;
-    };
+    }
 
 
     @Override

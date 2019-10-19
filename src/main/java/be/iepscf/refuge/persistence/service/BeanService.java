@@ -44,10 +44,10 @@ public class BeanService {
 
     public RoleDAO getRoleDAO() {
         return (RoleDAO) getVoldemortDAOFactory().getRoleDAO();
-    };
+    }
 
     public AnimalDAO getAnimalDAO() {
-        return (AnimalDAO) getVoldemortDAOFactory().getAnimalDAO();
+        return (AnimalDAO) getDAOFactory().getAnimalDAO();
     }
 
     public SpeciesDAO getSpeciesDAO() {
@@ -56,15 +56,15 @@ public class BeanService {
 
     public RaceDAO getRaceDAO() {
         return (RaceDAO) getVoldemortDAOFactory().getRaceDAO();
-    };
+    }
 
     public ColorDAO getColorDAO() {
         return (ColorDAO) getVoldemortDAOFactory().getColorDAO();
-    };
+    }
 
     public ContactRequestDAO getContactRequestDAO() {
         return (ContactRequestDAO) getVoldemortDAOFactory().getContactRequestDAO();
-    };
+    }
 
 
 
