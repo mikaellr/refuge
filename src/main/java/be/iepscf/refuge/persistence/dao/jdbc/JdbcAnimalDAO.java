@@ -31,6 +31,7 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
     private static final String FIND_IF_NOT_ADOPTED = SELECT + " WHERE adoptable = true";// OK
     private static final String FIND_ALL = SELECT + " ORDER BY animals.id DESC";// OK
 
+
     // De Creation/Update/Obsolescence :
     private static final String INSERT = "INSERT INTO animals " +
             "(name, description, birth_year, sex, sterilized, adoptable, photo_content_type, photo_content_length,photo_content, fk_species, fk_race, fk_color) " +

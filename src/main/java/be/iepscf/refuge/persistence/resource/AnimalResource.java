@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Collections;
 import java.util.List;
 
 @Path("/animal")
@@ -42,16 +43,72 @@ public class AnimalResource extends BaseResource {
                                @PathParam("all") Boolean all) {
 
         List<Animal> result = getBeanService().getAnimals();
+        List<Animal> transition = null;
 
         //Structures conditionnelles, "affinant" la liste :
 
         //Sélection de l'espèce
+        for ( Animal animal:result) {
+            if(animal.getSpecies().getId() == species_id){
+                transition.add(animal);
+            }
+        }
+        result.clear();
         //Sélection de la race
+        for ( Animal animal:transition) {
+            if(animal.getRace().getId() == race_id){
+                result.add(animal);
+            }
+        }
+        transition.clear();
         //Adoptable
-        //Last
-        //Offset (null ou valeur indiquée)
-        //Limit (null ou valeur indiquée)
-        //All (dépend des deux précédents)
+        for ( Animal animal:result) {
+            if(animal.isAdoptable()){
+                transition.add(animal);
+            }
+        }
+        // Première partie bouclée :
+
+        result = transition;
+        transition = null;
+
+        //Nombres de valeurs "affichées"
+        if(all){
+            //On garde tout
+        }
+        else{
+            if(offset != null && limit != null){
+                //Prennent tous les deux la valeur indiquée
+                int i=limit.intValue();
+                transition = result.subList(0,i);
+                i = offset.intValue();
+                Collections.rotate(transition,i);
+            }
+            else if(offset == null && limit != null){
+                //offset à 0, limite reste prend la valeur indiquée
+                int i=limit.intValue();
+                transition = result.subList(0,i);
+            }
+            else if(offset != null && limit == null){
+                //offset prend la valeur indiquée, limit reste à 20
+                int i = offset.intValue();
+                Collections.rotate(transition,i);
+                transition = result.subList(0,20);
+            }
+
+            else {
+                //offset à 0, limit à 20
+                transition = result.subList(0,20);
+            }
+        }
+        result = transition;
+        //Affichage ASC ou DESC
+        if(last){
+            //Liste reste en place
+        }
+        else{
+            Collections.reverse(result);
+        }
 
         if (result.isEmpty()) {
             return Response.status(404).build();
