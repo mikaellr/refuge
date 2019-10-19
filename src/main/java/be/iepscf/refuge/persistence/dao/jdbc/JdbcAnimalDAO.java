@@ -24,7 +24,7 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
             "LEFT OUTER JOIN species AS sp ON animal.fk_species = sp.id " +
             "LEFT OUTER JOIN races AS ra ON animals.fk_races = ra.id " +
             "LEFT OUTER JOIN colors AS co ON animals.fk_color = co.id ";*/
-    private static final String SELECT = "SELECT animals.id AS id, animals.name, description, birth_year, sex, sterilized, adoptable, photo_content,species.id AS species_id, species.name AS species_name,races.id AS race_id, races.name AS race_name, colors.id, colors.name FROM animals LEFT JOIN species ON animals.fk_species = species.id LEFT JOIN races ON animals.fk_race = races.id LEFT JOIN colors ON animals.fk_color = colors.id";
+    private static final String SELECT = "SELECT animals.id AS id, animals.name, description, birth_year, sex, sterilized, adoptable, photo_content, photo_content_length, photo_content_type, species.id AS species_id, species.name AS species_name,races.id AS race_id, races.name AS race_name, colors.id AS color_id, colors.name AS color_name FROM animals LEFT JOIN species ON animals.fk_species = species.id LEFT JOIN races ON animals.fk_race = races.id LEFT JOIN colors ON animals.fk_color = colors.id";
     private static final String FIND_BY_ID = SELECT + " WHERE animals.id = ?";
     private static final String FIND_BY_SPECIES = SELECT + " WHERE animals.fk_species=?";// OK
     private static final String FIND_BY_RACE = SELECT + " WHERE fk_race=?";// OK
@@ -36,7 +36,7 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
     // De Creation/Update/Obsolescence :
     private static final String INSERT = "INSERT INTO animals " +
             "(name, description, birth_year, sex, sterilized, adoptable, photo_content_type, photo_content_length,photo_content, fk_species, fk_race, fk_color) " +
-            "VALUES (?,?,?,?,?,true,?,?,?,?,?,?);";
+            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
 
     private static final String UPDATE = "UPDATE `animals` SET " +
             "`name` = ?, " +
@@ -68,23 +68,27 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
             preparedStatement.setInt(3, animal.getBirthYear());
             preparedStatement.setString(4, Character.toString(animal.getSex()));
             preparedStatement.setBoolean(5, animal.isSterilized());
-            //preparedStatement.setBoolean(6, animal.isAdoptable());
-            preparedStatement.setString(6, animal.getPhotoContentType());
-            preparedStatement.setInt(7, animal.getPhotoContentLength());
-            preparedStatement.setBytes(8, animal.getPhoto());
-            if(animal.getSpecies() == null ){
+            preparedStatement.setBoolean(6, animal.isAdoptable());
+            preparedStatement.setString(7, animal.getPhotoContentType());
+            preparedStatement.setInt(8, animal.getPhotoContentLength());
+            preparedStatement.setBytes(9, animal.getPhoto());
+            if (animal.getSpecies() == null ) {
                 Long nullLong = null;
-                preparedStatement.setLong(9, nullLong);
-            }else{
-                preparedStatement.setLong(9, animal.getSpecies().getId());
+                preparedStatement.setLong(10, java.sql.Types.INTEGER);
+            } else {
+                preparedStatement.setLong(10, animal.getSpecies().getId());
             }
-            if(animal.getRace() == null ){
+            if (animal.getRace() == null ) {
                 Long nullLong = null;
-                preparedStatement.setLong(10, nullLong);
-            }else{
-                preparedStatement.setLong(10, animal.getRace().getId());
+                preparedStatement.setNull(11, java.sql.Types.INTEGER);
+            } else {
+                preparedStatement.setLong(11, animal.getRace().getId());
             }
-            preparedStatement.setLong(11, animal.getColor().getId());
+            if (animal.getColor() == null) {
+                preparedStatement.setNull(12, java.sql.Types.INTEGER);
+            } else {
+                preparedStatement.setLong(12, animal.getColor().getId());
+            }
             affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {
                 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
@@ -105,6 +109,8 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
     }
     @Override
     public long update(Animal animal){
+        System.out.println("updating:"+animal);
+        System.out.println("updating:"+animal.getRace());
         long affectedRows = -1;
         try {
             Connection connection = getConnection();
@@ -118,9 +124,22 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
             preparedStatement.setString(7, animal.getPhotoContentType());
             preparedStatement.setInt(8, animal.getPhotoContentLength());
             preparedStatement.setBytes(9, animal.getPhoto());
-            preparedStatement.setLong(10, animal.getSpecies().getId());
-            preparedStatement.setLong(11, animal.getRace().getId());
-            preparedStatement.setLong(12, animal.getColor().getId());
+            if (animal.getSpecies() == null) {
+                preparedStatement.setNull(10, java.sql.Types.INTEGER);
+            } else {
+                preparedStatement.setLong(10, animal.getSpecies().getId());
+            }
+            if (animal.getRace() == null) {
+                preparedStatement.setLong(11, java.sql.Types.INTEGER);
+            } else {
+                preparedStatement.setLong(11, animal.getRace().getId());
+            }
+            if (animal.getColor() == null) {
+                preparedStatement.setLong(12, java.sql.Types.INTEGER);
+            } else {
+                preparedStatement.setLong(12, animal.getColor().getId());
+            }
+            preparedStatement.setLong(13, animal.getId());
             affectedRows = preparedStatement.executeUpdate();
             //if (affectedRows > 0) {
             //}
@@ -177,19 +196,27 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
         animal.setPhotoContentType(resultSet.getString("photo_content_type"));
         animal.setPhotoContentLength(resultSet.getInt("photo_content_length"));
         animal.setPhoto(resultSet.getBytes("photo_content"));
-        Species species = new Species();
-        species.setId(resultSet.getLong("species_id"));
-        species.setName(resultSet.getString("species_name"));
-        animal.setSpecies(species);
-        Race race = new Race();
-        race.setId(resultSet.getLong("race_id"));
-        race.setName(resultSet.getString("race_name"));
-        animal.setRace(race);
-        Color color = new Color();
-        color.setId(resultSet.getLong("color_id"));
-        color.setName(resultSet.getString("color_name"));
-        animal.setColor(color);
-
+        Long speciesId = resultSet.getLong("species_id");
+        if (! resultSet.wasNull()) {
+            Species species = new Species();
+            species.setId(speciesId);
+            species.setName(resultSet.getString("species_name"));
+            animal.setSpecies(species);
+        }
+        Long raceId = resultSet.getLong("race_id");
+        if (! resultSet.wasNull()) {
+            Race race = new Race();
+            race.setId(raceId);
+            race.setName(resultSet.getString("race_name"));
+            animal.setRace(race);
+        }
+        Long colorId = resultSet.getLong("color_id");
+        if (! resultSet.wasNull()) {
+            Color color = new Color();
+            color.setId(colorId);
+            color.setName(resultSet.getString("color_name"));
+            animal.setColor(color);
+        }
         return animal;
     }
 

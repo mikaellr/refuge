@@ -24,4 +24,9 @@ public class VoldemortAnimalDAO extends VoldemortGenericDAO<Animal, Long> implem
     public List<Animal> findAllAdoptable() {
         return null;
     }
+
+    @Override
+    public List<Animal> findMultiParameters(Long species, Long race, Boolean is_adopted, Boolean all, Boolean last, Long limit, Long offset) {
+        return null;
+    }
 }

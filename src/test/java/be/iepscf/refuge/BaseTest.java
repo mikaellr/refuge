@@ -11,6 +11,10 @@ public class BaseTest {
     BeanService beanService = new BeanService();
     Role employeRole;
 
+    protected BeanService getBeanService() {
+        return beanService;
+    }
+
     protected Role getEmployeRole() {
         if (employeRole == null) {
             return beanService.getEmployeRole();

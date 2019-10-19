@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BeanService {
 
-    public static boolean DISALLOW_VOLDEMORT = false;
+    public static boolean DISALLOW_VOLDEMORT = true;
     public static String DISALLOW_VOLDEMORT_MESSAGE = "Vous avez prononcé le nom de Voldemort.";
     DAOFactory jdbcDAOFactory;
     DAOFactory voldemortDAOFactory;
@@ -69,7 +69,7 @@ public class BeanService {
     }
 
     public ContactRequestDAO getContactRequestDAO() {
-        return getRaceDAOFactory().getContactRequestDAO();
+        return getDAOFactory().getContactRequestDAO();
     }
 
 
@@ -171,10 +171,6 @@ public class BeanService {
     }
 
     public List<Species> getSpecies() { return getSpeciesDAO().findAll(); }
-
-    public List<Race> getRacesBySpecies(Species species) {
-        return getSpeciesDAO().getRacesBySpecies(species);
-    }
 
     public long saveSpecies(Species item) {
         return getSpeciesDAO().save(item);

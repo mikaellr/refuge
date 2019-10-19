@@ -10,6 +10,4 @@ public interface SpeciesDAO extends GenericDAO<Species, Long> {
 
 	public Species findByName(String name);
 
-	public List<Race> getRacesBySpecies(Species species);
-	
 }

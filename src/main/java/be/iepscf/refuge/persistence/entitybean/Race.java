@@ -40,7 +40,7 @@ public class Race {
 	}
 
 	public String toString() {
-		return "Races#" + id + " (name=" + name + ", species=" + species.getName() + ")";
+		return "Races#" + id + " (name=" + name + ", species=" + (species != null ? species.getName() : null) + ")";
 	}
 
 	public Long getId() {
