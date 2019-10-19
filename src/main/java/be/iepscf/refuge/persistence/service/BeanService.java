@@ -136,6 +136,10 @@ public class BeanService {
         return getAnimalDAO().findAll();
     }
 
+    public List<Animal> getAnimalsByParameters(Long species, Long race, Boolean is_adopted, Boolean all, Boolean last, Long limit, Long offset) {
+        return getAnimalDAO().findMultiParameters(species, race, is_adopted, all, last, limit, offset);
+    }
+
     public long saveAnimal(Animal item) {
         return getAnimalDAO().save(item);
     }

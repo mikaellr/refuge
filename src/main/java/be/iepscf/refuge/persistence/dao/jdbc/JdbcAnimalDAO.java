@@ -30,6 +30,7 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
     private static final String FIND_BY_RACE = SELECT + " WHERE fk_race=?";// OK
     private static final String FIND_IF_NOT_ADOPTED = SELECT + " WHERE adoptable = true";// OK
     private static final String FIND_ALL = SELECT + " ORDER BY animals.id DESC";// OK
+    private static final String FIND_MULTIPLE_PARAMETERS = SELECT + " WHERE animals.fk_species = ? AND animals.fk_race = ? AND adoptable = ? ORDER BY animals.id [?] LIMIT ? OFFSET ?";
 
 
     // De Creation/Update/Obsolescence :
@@ -281,6 +282,60 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
                 Animal animal = fetch(resultSet);
                 animals.add(animal);
             }
+            preparedStatement.close();
+            closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return animals;
+    }
+
+    @Override
+    public List<Animal> findMultiParameters(Long species, Long race, Boolean is_adopted, Boolean all, Boolean last, Long limit, Long offset) {
+        List<Animal> animals = new ArrayList<>();
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_MULTIPLE_PARAMETERS);
+            preparedStatement.setLong(1, species);
+            preparedStatement.setLong(2, race);
+            preparedStatement.setBoolean(3, is_adopted);
+            if(last){
+                String descendant = "DESC";
+                preparedStatement.setString(4, descendant);
+            }
+            else{
+                String ascendant = "ASC";
+                preparedStatement.setString(4, ascendant);
+            }
+            if(all){
+                String tout = "ALL";
+                preparedStatement.setString(5, tout);
+                preparedStatement.setLong(6, 0);
+            }
+            else{
+                if(offset != null && limit != null){
+                    preparedStatement.setLong(5, limit);
+                    preparedStatement.setLong(6, offset);
+                }
+                else if(offset == null && limit != null){
+                    preparedStatement.setLong(5, limit);
+                    preparedStatement.setLong(6, 0);
+                }
+                else if(offset != null && limit == null){
+                    preparedStatement.setLong(5, 20);
+                    preparedStatement.setLong(6, offset);
+                }
+                else {
+                    preparedStatement.setLong(5, 0);
+                    preparedStatement.setLong(6, 20);
+                }
+            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Animal animal = fetch(resultSet);
+                animals.add(animal);
+            }
+            // En dessous OK
             preparedStatement.close();
             closeConnection();
         } catch (SQLException e) {
