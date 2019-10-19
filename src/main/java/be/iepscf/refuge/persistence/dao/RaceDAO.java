@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface RaceDAO extends GenericDAO<Race, Long> {
 
-    public List<Race> getRacesBySpecies(Species species);
+    public List<Race> findBySpecies(Species species);
 
 }

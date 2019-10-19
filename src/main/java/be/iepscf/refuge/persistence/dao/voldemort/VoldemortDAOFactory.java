@@ -5,9 +5,9 @@ import be.iepscf.refuge.persistence.dao.*;
 public class VoldemortDAOFactory extends DAOFactory {
 
 	
-	public GenericHibernateDAO createDAO(Class daoClass) {
+	public VoldemortGenericDAO createDAO(Class daoClass) {
 		try {
-			return (GenericHibernateDAO) daoClass.getDeclaredConstructor().newInstance();
+			return (VoldemortGenericDAO) daoClass.getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
 			throw new RuntimeException("Coudln't create DAO : " + daoClass);
 		}
@@ -50,6 +50,6 @@ public class VoldemortDAOFactory extends DAOFactory {
 
 
 	// inline empty DAO implementations :
-	//public static class WtfHibernateDAO extends GenericHibernateDAO<Marque, Long> implements UserDAO {};
+	//public static class WtfHibernateDAO extends VoldemortGenericDAO<Marque, Long> implements UserDAO {};
 	
 }

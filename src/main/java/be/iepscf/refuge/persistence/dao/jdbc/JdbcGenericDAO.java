@@ -23,7 +23,7 @@ import java.util.Properties;
  * @param <E>
  * @param <ID>
  */
-public class JdbcGenericDAO<E, ID extends Serializable> implements GenericDAO<E, ID> {
+public abstract class JdbcGenericDAO<E, ID extends Serializable> implements GenericDAO<E, ID> {
 
 	private Connection connection;
 	private Class<E> beanClass;
@@ -38,9 +38,13 @@ public class JdbcGenericDAO<E, ID extends Serializable> implements GenericDAO<E,
 
 
 
-	public Connection getConnection() {
+	public Connection getConnection() throws SQLException {
 		if (connection == null) {
 			connection = createConnection();
+		} else {
+			if (connection.isClosed()) {
+				connection = createConnection();
+			}
 		}
 		return connection;
 	}
@@ -78,6 +82,7 @@ public class JdbcGenericDAO<E, ID extends Serializable> implements GenericDAO<E,
 		if (connection != null) {
 			try {
 				connection.close();
+				connection = null;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -147,6 +152,9 @@ public class JdbcGenericDAO<E, ID extends Serializable> implements GenericDAO<E,
 	@Override
 	public long delete(E entity) {
 		//String sql = String.format("DELETE FROM %s WHERE %s=...", beanClass.getSimpleName());
+		System.err.println(String.format("method %s.%s not implemented by derived class, returning -1", getClass().getName(), new Exception()
+				.getStackTrace()[0]
+				.getMethodName()));
 		return -1;
 	}
 

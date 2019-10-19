@@ -13,7 +13,7 @@ import java.io.IOException;
  * Servlet implementation class AnimalServlet
  */
 @WebServlet("/logout")
-public class LogoutServlet extends BaseServlet {
+public class LogoutServlet extends PublicServlet {
 	private static final long serialVersionUID = 1L;
 
     /**

@@ -15,7 +15,7 @@ import be.iepscf.refuge.business.service.PublicService;
  * Servlet implementation class PhotoServlet
  */
 @WebServlet("/photo")
-public class PhotoServlet extends HttpServlet {
+public class PhotoServlet extends PublicServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -32,8 +32,7 @@ public class PhotoServlet extends HttpServlet {
 		String idString = request.getParameter("id");
 		if (idString != null) {
 			Long id = Long.parseLong(idString);
-			PublicService service = new PublicService();
-			Animal animal = service.getAnimal(id);
+			Animal animal = getPublicService().getAnimal(id);
 			if (animal != null) {
 				byte[] content = animal.getPhoto();
 				String contentType = animal.getPhotoContentType();

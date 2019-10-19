@@ -14,12 +14,13 @@ import be.iepscf.refuge.business.businessbean.Color;
 import be.iepscf.refuge.business.businessbean.Species;
 import be.iepscf.refuge.business.businessbean.User;
 import be.iepscf.refuge.business.service.PublicService;
+import be.iepscf.refuge.business.service.ServiceFactory;
 
 /**
  * Servlet implementation class IndexServlet
  */
 @WebServlet(urlPatterns = {""})
-public class IndexServlet extends HttpServlet {
+public class IndexServlet extends PublicServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -34,15 +35,8 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PublicService publicService = new PublicService();
-		List<Animal> animals = publicService.getAnimals();
-		List<User> users = publicService.getUsers();
-		List<Species> species = publicService.getSpecies();
-		List<Color> colors = publicService.getColors();
-		request.setAttribute("animals", animals);
-		request.setAttribute("users", users);
+		List<Species> species = getPublicService().getSpecies();
 		request.setAttribute("species", species);
-		request.setAttribute("colors", colors);
 		request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 	}
 
@@ -52,14 +46,6 @@ public class IndexServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
-
-	@Override
-	public void init() throws ServletException {
-	}
-
-	@Override
-	public void destroy() {
 	}
 
 }

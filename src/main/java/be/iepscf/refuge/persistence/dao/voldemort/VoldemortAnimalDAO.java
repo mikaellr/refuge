@@ -8,7 +8,7 @@ import be.iepscf.refuge.persistence.entitybean.Species;
 
 import java.util.List;
 
-public class VoldemortAnimalDAO extends GenericHibernateDAO<Animal, Long> implements AnimalDAO {
+public class VoldemortAnimalDAO extends VoldemortGenericDAO<Animal, Long> implements AnimalDAO {
 
     @Override
     public List<Animal> findBySpecies(Species species) {

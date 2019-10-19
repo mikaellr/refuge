@@ -10,27 +10,20 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-@Path("/user")
+@Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource extends BaseResource {
 
     @GET
-    @Path("/{param}")
-    public Response one(@PathParam("param") Long id) {
-        User user = getBeanService().getUser(id);
-        return Response.status(200).entity(user).build();
-    }
-
-    @GET
-    @Path("/")
-    public Response all() {
+    @Path("")
+    public Response getAll() {
         List<User> users = getBeanService().getUsers();
         GenericEntity<List<User>> usersEntity = new GenericEntity<List<User>>(users) {};
         return Response.status(200).entity(usersEntity).build();
     }
 
     @POST
-    @Path("/")
+    @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response save(User user) throws URISyntaxException
@@ -44,6 +37,13 @@ public class UserResource extends BaseResource {
         System.out.println("user received by api for saving:" + user);
         getBeanService().saveUser(user);
         return Response.created(new URI("/rest/user/" + user.getId())).build();
+    }
+
+    @GET
+    @Path("/{id}")
+    public Response get(@PathParam("id") Long id) {
+        User user = getBeanService().getUser(id);
+        return Response.status(200).entity(user).build();
     }
 
     @PUT

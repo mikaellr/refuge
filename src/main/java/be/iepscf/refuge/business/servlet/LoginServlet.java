@@ -1,7 +1,7 @@
 package be.iepscf.refuge.business.servlet;
 
 import be.iepscf.refuge.business.businessbean.User;
-import be.iepscf.refuge.business.service.EmployeService;
+import be.iepscf.refuge.business.service.GestionService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,7 @@ import java.io.IOException;
  * Servlet implementation class AnimalServlet
  */
 @WebServlet("/login")
-public class LoginServlet extends BaseServlet {
+public class LoginServlet extends PublicServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
@@ -24,10 +24,6 @@ public class LoginServlet extends BaseServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    
-    
-
-    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,8 +41,7 @@ public class LoginServlet extends BaseServlet {
 		String pPassword = request.getParameter("password");
 		if (pEmail != null && pPassword != null) {
 			System.out.println(String.format("email=%s, password=%s", pEmail, pPassword));
-			EmployeService es = new EmployeService();
-			User user = es.login(pEmail, pPassword);
+			User user = getPublicService().login(pEmail, pPassword);
 			if (user != null) {
 				request.getSession().setAttribute("user", user);
 				response.sendRedirect(request.getContextPath() + "/");

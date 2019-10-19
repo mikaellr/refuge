@@ -10,6 +10,8 @@ import java.util.List;
 
 public class BeanService {
 
+    public static boolean DISALLOW_VOLDEMORT = false;
+    public static String DISALLOW_VOLDEMORT_MESSAGE = "Vous avez prononcé le nom de Voldemort.";
     DAOFactory jdbcDAOFactory;
     DAOFactory voldemortDAOFactory;
 
@@ -19,16 +21,20 @@ public class BeanService {
 
     protected DAOFactory getJdbcDAOFactory() {
         if (jdbcDAOFactory == null) {
-             jdbcDAOFactory = DAOFactory.getDAOFactory(JdbcDAOFactory.class);
+            jdbcDAOFactory = DAOFactory.getDAOFactory(JdbcDAOFactory.class);
         }
         return jdbcDAOFactory;
     }
 
     protected DAOFactory getVoldemortDAOFactory() {
-        if (voldemortDAOFactory == null) {
-            voldemortDAOFactory =  DAOFactory.getDAOFactory(VoldemortDAOFactory.class);
+        if (DISALLOW_VOLDEMORT) {
+            throw new RuntimeException(DISALLOW_VOLDEMORT_MESSAGE);
+        } else {
+            if (voldemortDAOFactory == null) {
+                voldemortDAOFactory = DAOFactory.getDAOFactory(VoldemortDAOFactory.class);
+            }
+            return voldemortDAOFactory;
         }
-        return voldemortDAOFactory;
     }
 
 
@@ -39,31 +45,31 @@ public class BeanService {
     (tests unitaires sur ses méthodes, idéalement) */
 
     public UserDAO getUserDAO() {
-        return (UserDAO) getDAOFactory().getUserDAO();
+        return getDAOFactory().getUserDAO();
     }
 
     public RoleDAO getRoleDAO() {
-        return (RoleDAO) getVoldemortDAOFactory().getRoleDAO();
+        return getDAOFactory().getRoleDAO();
     }
 
     public AnimalDAO getAnimalDAO() {
-        return (AnimalDAO) getDAOFactory().getAnimalDAO();
+        return getDAOFactory().getAnimalDAO();
     }
 
     public SpeciesDAO getSpeciesDAO() {
-        return (SpeciesDAO) getVoldemortDAOFactory().getSpeciesDAO();
+        return getDAOFactory().getSpeciesDAO();
     }
 
     public RaceDAO getRaceDAO() {
-        return (RaceDAO) getVoldemortDAOFactory().getRaceDAO();
+        return getDAOFactory().getRaceDAO();
     }
 
     public ColorDAO getColorDAO() {
-        return (ColorDAO) getVoldemortDAOFactory().getColorDAO();
+        return getDAOFactory().getColorDAO();
     }
 
     public ContactRequestDAO getContactRequestDAO() {
-        return (ContactRequestDAO) getVoldemortDAOFactory().getContactRequestDAO();
+        return getRaceDAOFactory().getContactRequestDAO();
     }
 
 
@@ -194,6 +200,10 @@ public class BeanService {
         return getRaceDAO().findAll();
     }
 
+    public List<Race> getRacesBySpecies(Species species) {
+        return getRaceDAO().findBySpecies(species);
+    }
+
     public long saveRace(Race item) {
         return getRaceDAO().save(item);
     }
@@ -205,7 +215,6 @@ public class BeanService {
     public long deleteRace(Race item) {
         return getRaceDAO().delete(item);
     }
-
 
 
 
@@ -237,6 +246,7 @@ public class BeanService {
 
 
 
+
     /* ContactRequest : */
 
     public ContactRequest getContactRequest(Long id) {
@@ -245,6 +255,10 @@ public class BeanService {
 
     public List<ContactRequest> getContactRequests() {
         return getContactRequestDAO().findAll();
+    }
+
+    public List<ContactRequest> getContactRequestsByAnimal(Animal animal) {
+        return getContactRequestDAO().findByAnimal(animal);
     }
 
     public long saveContactRequest(ContactRequest item) {
