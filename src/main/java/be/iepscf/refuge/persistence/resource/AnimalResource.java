@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Collections;
 import java.util.List;
 
 @Path("/animal")
@@ -23,7 +24,6 @@ public class AnimalResource extends BaseResource {
     }
 
     /**
-     * @todo redondance cyclique species > races > species > ...
      * @return
      */
     @GET
@@ -35,4 +35,19 @@ public class AnimalResource extends BaseResource {
     }
 
 
+    @GET
+    @Path("/?species={species-id}&race={race-id}&offset={offset}&limit={limit}&last={last}&adoptable={adoptable}&all={all}")
+    public Response getAnimals(@PathParam("species-id") Long species_id, @PathParam("race-id") Long race_id,
+                               @PathParam("offset") Long offset, @PathParam("limit") Long limit,
+                               @PathParam("last") Boolean last, @PathParam("adoptable") Boolean adoptable,
+                               @PathParam("all") Boolean all) {
+
+        List<Animal> result = getBeanService().getAnimalsByParameters(species_id, race_id, adoptable,all, last,limit, offset);
+
+        if (result.isEmpty()) {
+            return Response.status(404).build();
+        } else {
+            return Response.status(200).entity(result).build();
+        }
+    }
 }

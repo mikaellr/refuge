@@ -43,14 +43,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getPhone());
-            preparedStatement.setString(5, user.getHash());
-            preparedStatement.setString(6, user.getSalt());
-            preparedStatement.setBoolean(7, user.isActive());
-            preparedStatement.setLong(8, user.getRole().getId());
+            settingPreparedStatement(user, preparedStatement);
             affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {
                 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
@@ -77,14 +70,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getPhone());
-            preparedStatement.setString(5, user.getHash());
-            preparedStatement.setString(6, user.getSalt());
-            preparedStatement.setBoolean(7, user.isActive());
-            preparedStatement.setLong(8, user.getRole().getId());
+            settingPreparedStatement(user, preparedStatement);
             preparedStatement.setLong(9, user.getId());
             affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {
@@ -96,6 +82,17 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
             e.printStackTrace();
         }
         return affectedRows;
+    }
+
+    private void settingPreparedStatement(User user, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setString(1, user.getFirstName());
+        preparedStatement.setString(2, user.getLastName());
+        preparedStatement.setString(3, user.getEmail());
+        preparedStatement.setString(4, user.getPhone());
+        preparedStatement.setString(5, user.getHash());
+        preparedStatement.setString(6, user.getSalt());
+        preparedStatement.setBoolean(7, user.isActive());
+        preparedStatement.setLong(8, user.getRole().getId());
     }
 
     @Override

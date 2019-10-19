@@ -76,6 +76,8 @@ public abstract class JdbcGenericDAO<E, ID extends Serializable> implements Gene
 		return null;
 	}
 
+
+
 	public void closeConnection() {
 		if (connection != null) {
 			try {

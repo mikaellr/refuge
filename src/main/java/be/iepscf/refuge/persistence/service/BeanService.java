@@ -52,33 +52,25 @@ public class BeanService {
         return getDAOFactory().getRoleDAO();
     }
 
-    ;
-
     public AnimalDAO getAnimalDAO() {
-        return getVoldemortDAOFactory().getAnimalDAO();
+        return getDAOFactory().getAnimalDAO();
     }
 
     public SpeciesDAO getSpeciesDAO() {
-        return getVoldemortDAOFactory().getSpeciesDAO();
+        return getDAOFactory().getSpeciesDAO();
     }
 
     public RaceDAO getRaceDAO() {
         return getDAOFactory().getRaceDAO();
     }
 
-    ;
-
     public ColorDAO getColorDAO() {
-        return getVoldemortDAOFactory().getColorDAO();
+        return getDAOFactory().getColorDAO();
     }
-
-    ;
 
     public ContactRequestDAO getContactRequestDAO() {
-        return getDAOFactory().getContactRequestDAO();
+        return getRaceDAOFactory().getContactRequestDAO();
     }
-
-    ;
 
 
 
@@ -150,6 +142,10 @@ public class BeanService {
         return getAnimalDAO().findAll();
     }
 
+    public List<Animal> getAnimalsByParameters(Long species, Long race, Boolean is_adopted, Boolean all, Boolean last, Long limit, Long offset) {
+        return getAnimalDAO().findMultiParameters(species, race, is_adopted, all, last, limit, offset);
+    }
+
     public long saveAnimal(Animal item) {
         return getAnimalDAO().save(item);
     }
@@ -174,8 +170,10 @@ public class BeanService {
         return getSpeciesDAO().findByName(name);
     }
 
-    public List<Species> getSpecies() {
-        return getSpeciesDAO().findAll();
+    public List<Species> getSpecies() { return getSpeciesDAO().findAll(); }
+
+    public List<Race> getRacesBySpecies(Species species) {
+        return getSpeciesDAO().getRacesBySpecies(species);
     }
 
     public long saveSpecies(Species item) {

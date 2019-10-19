@@ -1,4 +1,10 @@
+
+Test Lolo
+
+Persistance001
+
 Projet d'Intégration de Développement, IEPSCF Namur 2019-2020.
+
 
 Projet "refuge" : gestion d'un refuge d'animaux à adopter.
 
