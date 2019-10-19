@@ -1,5 +1,6 @@
 package be.iepscf.refuge.persistence.dao.jdbc;
 
+import be.iepscf.refuge.BaseTest;
 import be.iepscf.refuge.persistence.entitybean.Role;
 import be.iepscf.refuge.persistence.entitybean.User;
 import be.iepscf.refuge.persistence.service.BeanService;
@@ -10,26 +11,8 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class JdbcUserDAOTest {
+class JdbcUserDAOTest extends BaseTest {
 
-    BeanService beanService = new BeanService();
-    Role employeRole;
-
-    protected Role getEmployeRole() {
-        if (employeRole == null) {
-            return beanService.getEmployeRole();
-        }
-        return employeRole;
-    }
-
-    protected User createUser() {
-        String firstName = "René";
-        String lastName = "Char";
-        String uuid = java.util.UUID.randomUUID().toString();
-        String email = String.format("%s.%s.%s@gmail.com", firstName, lastName, uuid);
-        User item = new User(null, firstName, lastName, email, null, uuid, uuid, true, getEmployeRole());
-        return item;
-    }
 
     @Test
     void save() {

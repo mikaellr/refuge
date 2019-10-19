@@ -74,7 +74,7 @@ public class JdbcRaceDAO extends JdbcGenericDAO<Race, Long> implements RaceDAO {
 
     @Override
     public List<Race> findBySpecies(Species species) {
-        List<Race> Races = new ArrayList<Race>();
+        List<Race> races = new ArrayList<Race>();
         try {
             Connection connection = getConnection();
             String SQL = FIND_BY_SPECIES;
@@ -84,7 +84,7 @@ public class JdbcRaceDAO extends JdbcGenericDAO<Race, Long> implements RaceDAO {
             while (resultSet.next()) {
                 Race race = fetch(resultSet);
                 if (race != null) {
-                    Races.add(race);
+                    races.add(race);
                 }
             }
             preparedStatement.close();
@@ -92,6 +92,6 @@ public class JdbcRaceDAO extends JdbcGenericDAO<Race, Long> implements RaceDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Races;
+        return races;
     };
 }

@@ -1,8 +1,8 @@
 package be.iepscf.refuge.persistence.dao.jdbc;
 
+import be.iepscf.refuge.BaseTest;
 import be.iepscf.refuge.persistence.entitybean.Animal;
 import be.iepscf.refuge.persistence.entitybean.ContactRequest;
-import be.iepscf.refuge.persistence.service.BeanService;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -11,31 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class JdbcContactRequestDAOTest {
-
-    protected Animal getAnimal() {
-        return getAnimal(32L); // bubulle
-    }
-    protected Animal getAnimal(Long id) {
-        return (new BeanService()).getAnimal(id);
-
-    }
-
-
-
-    protected ContactRequest createContactRequest() {
-        String firstName = "Louis";
-        String lastName = "Dupont";
-        String uuid = java.util.UUID.randomUUID().toString();
-        String email = String.format("%s.%s.%s@gmail.com", firstName, lastName, uuid);
-        String phone = "081/14786x";
-        String message = "je voudrais savoir un truc";
-        Date date = new Date();
-        boolean treated = false;
-        Animal animal = getAnimal();
-        ContactRequest cr = new ContactRequest(null, firstName, lastName, email, phone, message, date, treated, animal);
-        return cr;
-    }
+class JdbcContactRequestDAOTest extends BaseTest {
 
     @Test
     void save() {

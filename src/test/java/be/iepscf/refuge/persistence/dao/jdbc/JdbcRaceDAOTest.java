@@ -1,5 +1,6 @@
 package be.iepscf.refuge.persistence.dao.jdbc;
 
+import be.iepscf.refuge.BaseTest;
 import be.iepscf.refuge.persistence.entitybean.Race;
 import be.iepscf.refuge.persistence.entitybean.Species;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class JdbcRaceDAOTest {
+class JdbcRaceDAOTest extends BaseTest {
 
     @Test
     void testFind() {
