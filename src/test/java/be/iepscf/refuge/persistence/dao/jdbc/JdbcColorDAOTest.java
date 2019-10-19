@@ -1,12 +1,8 @@
 package be.iepscf.refuge.persistence.dao.jdbc;
 
 import be.iepscf.refuge.persistence.entitybean.Color;
-import be.iepscf.refuge.persistence.entitybean.Role;
-import be.iepscf.refuge.persistence.entitybean.User;
-import be.iepscf.refuge.persistence.service.BeanService;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
