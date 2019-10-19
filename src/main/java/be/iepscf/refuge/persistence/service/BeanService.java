@@ -164,8 +164,10 @@ public class BeanService {
         return getSpeciesDAO().findByName(name);
     }
 
-    public List<Species> getSpecies() {
-        return getSpeciesDAO().findAll();
+    public List<Species> getSpecies() { return getSpeciesDAO().findAll(); }
+
+    public List<Race> getRacesBySpecies(Species species) {
+        return getSpeciesDAO().getRacesBySpecies(species);
     }
 
     public long saveSpecies(Species item) {

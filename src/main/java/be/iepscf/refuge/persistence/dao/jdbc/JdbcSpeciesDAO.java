@@ -1,5 +1,6 @@
 package be.iepscf.refuge.persistence.dao.jdbc;
 
+import be.iepscf.refuge.persistence.entitybean.Race;
 import be.iepscf.refuge.persistence.entitybean.Species;
 import be.iepscf.refuge.persistence.dao.SpeciesDAO;
 
@@ -16,6 +17,7 @@ public class JdbcSpeciesDAO extends JdbcGenericDAO<Species, Long> implements Spe
     private static final String FIND_BY_ID = SELECT + " WHERE id=?";
     private static final String FIND_BY_NAME = SELECT + " WHERE name=?";
     private static final String FIND_ALL = SELECT + " ORDER BY name";
+    private static final String FIND_RACES_BY_SPECIES =  "SELECT id, name FROM races LEFT JOIN species ON races.fk_species = species.id WHERE species.id = ?";
 
     // De Creation/Update/Obsolescence :
     private static final String INSERT = "INSERT INTO species " +
@@ -80,6 +82,13 @@ public class JdbcSpeciesDAO extends JdbcGenericDAO<Species, Long> implements Spe
         return item;
     }
 
+    public Race fetchRace(ResultSet resultSet) throws SQLException {
+        Race item = new Race();
+        item.setId(Long.parseLong(resultSet.getString("id")));
+        item.setName(resultSet.getString("name"));
+        return item;
+    }
+
 
     @Override
     public Species find(Long id){
@@ -130,6 +139,24 @@ public class JdbcSpeciesDAO extends JdbcGenericDAO<Species, Long> implements Spe
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<Race> getRacesBySpecies(Species species) {
+        List<Race> items = new ArrayList<>();
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_RACES_BY_SPECIES);
+            preparedStatement.setLong(1,species.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Race item = fetchRace(resultSet);
+                items.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
     }
 
 
