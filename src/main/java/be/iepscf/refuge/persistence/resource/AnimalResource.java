@@ -34,16 +34,29 @@ public class AnimalResource extends BaseResource {
     }
 
 
-    /*@GET
-    @Path("/{key}")
-    public Response getEmployee(@PathParam("key") int key) {
+    @GET
+    @Path("/?species={species-id}&race={race-id}&offset={offset}&limit={limit}&last={last}&adoptable={adoptable}&all={all}")
+    public Response getAnimals(@PathParam("species-id") Long species_id, @PathParam("race-id") Long race_id,
+                               @PathParam("offset") Long offset, @PathParam("limit") Long limit,
+                               @PathParam("last") Boolean last, @PathParam("adoptable") Boolean adoptable,
+                               @PathParam("all") Boolean all) {
 
-        if (employeesRepository.containsKey(key)) {
+        List<Animal> result = getBeanService().getAnimals();
 
-            return Response.ok(employeesRepository.get(key)).build();
-        } else {
+        //Structures conditionnelles, "affinant" la liste :
 
+        //Sélection de l'espèce
+        //Sélection de la race
+        //Adoptable
+        //Last
+        //Offset (null ou valeur indiquée)
+        //Limit (null ou valeur indiquée)
+        //All (dépend des deux précédents)
+
+        if (result.isEmpty()) {
             return Response.status(404).build();
+        } else {
+            return Response.status(200).entity(result).build();
         }
-    }*/
+    }
 }
