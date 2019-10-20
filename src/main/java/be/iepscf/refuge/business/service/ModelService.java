@@ -229,4 +229,9 @@ public class ModelService {
         return getContactRequestMAO().update(contactRequest);
     }
 
+
+    public List<ContactRequest> getContactRequest() {
+        return getContactRequestMAO().get();
+    }
+
 }

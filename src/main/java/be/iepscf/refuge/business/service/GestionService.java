@@ -140,4 +140,28 @@ public class GestionService extends PublicService {
 		return contactRequest;
 	}
 
+	public ContactRequest updateContactRequest(Long id, String firstName, String lastName, String email, String phone, String message, boolean treated){
+		ContactRequest contactRequest = getContactRequests(id);
+		if (contactRequest == null) {
+			return null;
+		}
+		contactRequest.setFirstName(firstName);
+		contactRequest.setLastName(lastName);
+		contactRequest.setEmail(email);
+		contactRequest.setPhone(phone);
+		contactRequest.setMessage(message);
+		contactRequest.setTreated(treated);
+
+		long affectedRows = getModelService().updateContactRequest(contactRequest);
+		return contactRequest;
+	}
+
+	public ContactRequest getContactRequest(Long id) {
+		return getModelService().getContactRequest(id);
+	}
+
+	public List<ContactRequest> geContactRequest() {
+		return getModelService().getContactRequest();
+	}
+
 }
