@@ -15,7 +15,6 @@ import java.util.List;
 public class UserResource extends BaseResource {
 
     @GET
-    @Path("")
     public Response getAll() {
         List<User> users = getBeanService().getUsers();
         GenericEntity<List<User>> usersEntity = new GenericEntity<List<User>>(users) {};
@@ -23,7 +22,6 @@ public class UserResource extends BaseResource {
     }
 
     @POST
-    @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response save(User user) throws URISyntaxException
@@ -43,7 +41,10 @@ public class UserResource extends BaseResource {
     @Path("/{id}")
     public Response get(@PathParam("id") Long id) {
         User user = getBeanService().getUser(id);
-        return Response.status(200).entity(user).build();
+        if (user != null) {
+            return Response.status(200).entity(user).build();
+        }
+        return Response.status(404).entity("resource not found").build();
     }
 
     @PUT

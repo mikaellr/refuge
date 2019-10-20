@@ -12,13 +12,13 @@ import javax.ws.rs.core.Response;
 import java.util.Collections;
 import java.util.List;
 
-@Path("/animal")
+@Path("/animals")
 @Produces(MediaType.APPLICATION_JSON)
 public class AnimalResource extends BaseResource {
 
     @GET
-    @Path("/{param}")
-    public Response one(@PathParam("param") Long id) {
+    @Path("/{id}")
+    public Response one(@PathParam("id") Long id) {
         Animal item = getBeanService().getAnimal(id);
         return Response.status(200).entity(item).build();
     }
@@ -27,13 +27,12 @@ public class AnimalResource extends BaseResource {
      * @return
      */
     @GET
-    @Path("/")
+    @Path("")
     public Response all() {
         List<Animal> items = getBeanService().getAnimals();
         GenericEntity<List<Animal>> usersEntity = new GenericEntity<List<Animal>>(items) {};
         return Response.status(200).entity(items).build();
     }
-
 
     @GET
     @Path("/?species={species-id}&race={race-id}&offset={offset}&limit={limit}&last={last}&adoptable={adoptable}&all={all}")
@@ -50,4 +49,5 @@ public class AnimalResource extends BaseResource {
             return Response.status(200).entity(result).build();
         }
     }
+
 }

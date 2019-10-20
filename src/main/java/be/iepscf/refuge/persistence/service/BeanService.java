@@ -5,6 +5,7 @@ import be.iepscf.refuge.persistence.dao.voldemort.VoldemortDAOFactory;
 import be.iepscf.refuge.persistence.entitybean.*;
 import be.iepscf.refuge.persistence.dao.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -198,6 +199,14 @@ public class BeanService {
 
     public List<Race> getRacesBySpecies(Species species) {
         return getRaceDAO().findBySpecies(species);
+    }
+
+    public List<Race> getRacesBySpecies(Long id) {
+        Species species = getSpecies(id);
+        if (species == null) {
+            return new ArrayList<Race>();
+        }
+        return getRacesBySpecies(species);
     }
 
     public long saveRace(Race item) {
