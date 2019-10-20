@@ -34,7 +34,7 @@
 
     <h2>Recherche d'un animal à adopter :</h2>
 
-    <form method=""post" action="<c:url value="/animals"/>">
+    <form method="post" action="<c:url value="/animals"/>">
     <select id="species" name="species">
         <c:forEach items="${species}" var="speciesItem">
             <option value="${speciesItem.id}">${speciesItem.name}</option>
