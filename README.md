@@ -1,8 +1,3 @@
-
-Test Lolo
-
-Persistance001
-
 Projet d'Intégration de Développement, IEPSCF Namur 2019-2020.
 
 
