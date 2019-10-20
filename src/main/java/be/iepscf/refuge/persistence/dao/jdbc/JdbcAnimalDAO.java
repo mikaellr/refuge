@@ -259,12 +259,12 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
     }
 
     @Override
-    public List<Animal> findBySpecies(Species species) {
+    public List<Animal> findBySpecies(Long id) {
         List<Animal> animals = new ArrayList<>();
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_SPECIES);
-            preparedStatement.setLong(1, species.getId());
+            preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Animal animal = fetch(resultSet);
@@ -279,12 +279,12 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
     }
 
     @Override
-    public List<Animal> findByRace(Race race) {
+    public List<Animal> findByRaces(Long id) {
         List<Animal> animals = new ArrayList<>();
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_RACE);
-            preparedStatement.setLong(1, race.getId());
+            preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Animal animal = fetch(resultSet);

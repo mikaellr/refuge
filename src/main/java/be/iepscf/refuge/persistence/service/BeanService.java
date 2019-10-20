@@ -147,6 +147,14 @@ public class BeanService {
         return getAnimalDAO().findMultiParameters(species, race, is_adopted, all, last, limit, offset);
     }
 
+    public List<Animal> getAnimalsBySpecies(Long id) {
+        return getAnimalDAO().findBySpecies(id);
+    }
+
+    public List<Animal> getAnimalsByRaces(Long id) {
+        return getAnimalDAO().findByRaces(id);
+    }
+
     public long saveAnimal(Animal item) {
         return getAnimalDAO().save(item);
     }

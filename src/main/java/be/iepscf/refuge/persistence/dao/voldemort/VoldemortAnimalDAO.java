@@ -11,12 +11,12 @@ import java.util.List;
 public class VoldemortAnimalDAO extends VoldemortGenericDAO<Animal, Long> implements AnimalDAO {
 
     @Override
-    public List<Animal> findBySpecies(Species species) {
+    public List<Animal> findBySpecies(Long id) {
         return null;
     }
 
     @Override
-    public List<Animal> findByRace(Race race) {
+    public List<Animal> findByRaces(Long id) {
         return null;
     }
 

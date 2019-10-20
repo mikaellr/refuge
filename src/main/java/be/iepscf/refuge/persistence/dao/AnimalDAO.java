@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface AnimalDAO extends GenericDAO<Animal, Long> {
 
-    public List<Animal> findBySpecies(Species species);
+    public List<Animal> findBySpecies(Long id);
 
-    public List<Animal> findByRace(Race race);
+    public List<Animal> findByRaces(Long id);
 
     public  List<Animal> findAllAdoptable();
 
