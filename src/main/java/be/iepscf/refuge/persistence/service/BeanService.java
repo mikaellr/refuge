@@ -1,7 +1,6 @@
 package be.iepscf.refuge.persistence.service;
 
 import be.iepscf.refuge.persistence.dao.jdbc.JdbcDAOFactory;
-import be.iepscf.refuge.persistence.dao.voldemort.VoldemortDAOFactory;
 import be.iepscf.refuge.persistence.entitybean.*;
 import be.iepscf.refuge.persistence.dao.*;
 
@@ -152,7 +151,7 @@ public class BeanService {
     }
 
     public List<Animal> getAnimalsByRaces(Long id) {
-        return getAnimalDAO().findByRaces(id);
+        return getAnimalDAO().findByRace(id);
     }
 
     public long saveAnimal(Animal item) {

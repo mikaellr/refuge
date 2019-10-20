@@ -10,9 +10,9 @@ public interface AnimalDAO extends GenericDAO<Animal, Long> {
 
     public List<Animal> findBySpecies(Long id);
 
-    public List<Animal> findByRaces(Long id);
+    public List<Animal> findByRace(Long id);
 
-    public  List<Animal> findAllAdoptable();
+    public  List<Animal> findNonAdoptable();
 
     public List<Animal> findMultiParameters(Long species, Long race, Boolean is_adopted, Boolean all, Boolean last, Long limit, Long offset);
 	

@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class JdbcAnimalDAOTest extends BaseTest {
 
@@ -73,6 +72,81 @@ class JdbcAnimalDAOTest extends BaseTest {
         assertTrue(items.size() > 0);
         for (Animal item : items) {
             assertTrue(item instanceof Animal);
+            assertTrue(item.isAdoptable());
+        }
+    }
+
+    @Test
+    void findBySpecies() {
+        Long IdChat = 2L;
+        JdbcAnimalDAO dao = new JdbcAnimalDAO();
+        List<Animal> items = dao.findBySpecies(IdChat);
+        assertTrue(items.size() > 0);
+        for (Animal item : items) {
+            assertTrue(item instanceof Animal);
+            assertTrue(item.isAdoptable());
+            assertEquals(item.getSpecies().getId(), IdChat);
+        }
+    }
+
+    @Test
+    void findByRace() {
+        Long IdBergerAllemand = 24L;
+        JdbcAnimalDAO dao = new JdbcAnimalDAO();
+        List<Animal> items = dao.findByRace(IdBergerAllemand);
+        assertTrue(items.size() > 0);
+        for (Animal item : items) {
+            assertTrue(item instanceof Animal);
+            assertTrue(item.isAdoptable());
+            assertEquals(item.getRace().getId(), IdBergerAllemand);
+        }
+    }
+
+    @Test
+    void findNonAdoptable() {
+        JdbcAnimalDAO dao = new JdbcAnimalDAO();
+        List<Animal> items = dao.findNonAdoptable();
+        assertTrue(items.size() > 0);
+        for (Animal item : items) {
+            assertTrue(item instanceof Animal);
+            assertFalse(item.isAdoptable());
+        }
+    }
+
+    @Test
+    void findQueryDefault() {
+        Long defaultLimit = 20L;
+        JdbcAnimalDAO dao = new JdbcAnimalDAO();
+        List<Animal> items = dao.findMultiParameters(null, null, null, null, null, null, null);
+        assertTrue(items.size() == defaultLimit);
+        for (Animal item : items) {
+            assertTrue(item instanceof Animal);
+        }
+    }
+
+    @Test
+    void findQueryBySpecies() {
+        Long idChat = 2L;
+        JdbcAnimalDAO dao = new JdbcAnimalDAO();
+        List<Animal> items = dao.findMultiParameters(idChat, null, null, null, null, null, null);
+        assertTrue(items.size() > 0);
+        for (Animal item : items) {
+            assertTrue(item instanceof Animal);
+            assertEquals(item.getSpecies().getId(), idChat);
+        }
+    }
+
+    @Test
+    void findQueryBySpeciesAndRace() {
+        Long idChien = 1L;
+        Long idBergerAllemand = 24L;
+        JdbcAnimalDAO dao = new JdbcAnimalDAO();
+        List<Animal> items = dao.findMultiParameters(idChien, idBergerAllemand, null, null, null, null, null);
+        assertTrue(items.size() > 0);
+        for (Animal item : items) {
+            assertTrue(item instanceof Animal);
+            assertEquals(item.getSpecies().getId(), idChien);
+            assertEquals(item.getRace().getId(), idBergerAllemand);
         }
     }
 

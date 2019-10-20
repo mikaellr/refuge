@@ -20,34 +20,25 @@
             </header>
             <nav id="menu">
                 <ul>
-                    <li class="menu_logo"><img src="<c:url value="/img/logo_100.png"/>" alt="logo patte de chien"></li>
+                    <li class="menu_logo"><a class="" href="<c:url value="/"/>"><img src="<c:url value="/img/logo_100.png"/>" alt="logo patte de chien"></a></li>
                     <li class="menu_item"><a class="" href="<c:url value="/"/>">Accueil</a></li>
-                    <li class="menu_item"><a class="" href="<c:url value="/"/>">Adopter</a></li>
-                    <li class="menu_item"><a class="" href="<c:url value="/"/>">Contact</a></li>
-                    <li class="login"><a class="" href="<c:url value="/"/>">Se connecter</a></li>
-                    <li class="login"><a class="" href="<c:url value="/"/>">Se déconnecter</a></li>
+                    <li class="menu_item"><a class="" href="<c:url value="/animals"/>">Adopter</a></li>
+                    <li class="menu_item"><a class="" href="<c:url value="/contact"/>">Contact</a></li>
+
+                    <c:choose>
+                        <c:when test="${sessionScope.user != null}">
+                                <li class="menu_item"><a class="" href="<c:url value="/gestion/"/>">Gestion</a></li>
+                            <li class="login"><a class="" href="<c:url value="/logout"/>">Se déconnecter</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="login"><a class="" href="<c:url value="/login"/>">Se connecter</a></li>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </nav>
-
             <div>
-                <hr/>
-                <a href="<c:url value="/"/>">Refuge</a>
-                <a href="<c:url value="/gestion/"/>">gestion/</a>
-                <a href="<c:url value="/gestion/users"/>">gestion/users</a>
-
-                <c:choose>
-                    <c:when test="${sessionScope.user != null}">
-                        <a href="<c:url value="/logout"/>">logout</a>
-                        ${sessionScope.user}
-                    </c:when>
-                    <c:otherwise>
-                        <a href="<c:url value="/login"/>">login</a>
-                    </c:otherwise>
-                </c:choose>
-
-
-                (<a href="<c:url value="/rest/"/>">rest</a>)
-                <hr/>
+            <c:if test="${sessionScope.user != null}">
+                <span>${sessionScope.user.firstName} ${sessionScope.user.lastName} </span>
+            </c:if>
             </div>
-
             <!-- end of header -->

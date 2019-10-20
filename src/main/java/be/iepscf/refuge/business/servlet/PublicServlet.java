@@ -88,7 +88,12 @@ public abstract class PublicServlet extends HttpServlet {
     protected Species getSpeciesParameter(HttpServletRequest request, String name) {
         String idSpecies = request.getParameter(name);
         if (idSpecies != null) {
-            Long id = Long.parseLong(idSpecies);
+            Long id;
+            try {
+                id = Long.parseLong(idSpecies);
+            } catch (NumberFormatException e) {
+                id = null;
+            }
             if (id != null && id != 0) {
                 Species species = getPublicService().getSpecies(id);
                 if (species != null) {
@@ -106,7 +111,12 @@ public abstract class PublicServlet extends HttpServlet {
     protected Race getRaceParameter(HttpServletRequest request, String name) {
         String idRace = request.getParameter(name);
         if (idRace != null) {
-            Long id = Long.parseLong(idRace);
+            Long id;
+            try {
+                id = Long.parseLong(idRace);
+            } catch (NumberFormatException e) {
+                id = null;
+            }
             if (id != null && id != 0) {
                 Race race = getPublicService().getRace(id);
                 if (race != null) {

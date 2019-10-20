@@ -3,6 +3,7 @@
 
 
     <ul>
+        <li><a href="<c:url value="/gestion/animal-add"/>">Ajout animal</a></li>
         <li><a href="<c:url value="/gestion/users"/>">Liste utilisateurs</a></li>
         <li><a href="<c:url value="/gestion/user-add"/>">Ajout utilisateur</a></li>
     </ul>

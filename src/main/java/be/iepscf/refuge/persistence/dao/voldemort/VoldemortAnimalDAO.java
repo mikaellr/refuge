@@ -16,12 +16,12 @@ public class VoldemortAnimalDAO extends VoldemortGenericDAO<Animal, Long> implem
     }
 
     @Override
-    public List<Animal> findByRaces(Long id) {
+    public List<Animal> findByRace(Long id) {
         return null;
     }
 
     @Override
-    public List<Animal> findAllAdoptable() {
+    public List<Animal> findNonAdoptable() {
         return null;
     }
 
