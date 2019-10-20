@@ -7,6 +7,10 @@
         <meta charset="UTF-8">
         <title>refuge</title>
         <link rel="stylesheet" href="<c:url value = "/css/refuge.proto.css"/>"/>
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
         </head>
         <body>
         <header>
