@@ -13,7 +13,7 @@ import java.io.IOException;
 public class UserActivateServlet extends GestionServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id = getParameter(request, "id");
+        Long id = getLongParameter(request, "id");
         getGestionService().activateUser(id);
         sendRedirect(response, "/gestion/users");
     }

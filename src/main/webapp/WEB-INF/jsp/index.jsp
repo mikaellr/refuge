@@ -2,7 +2,7 @@
     <script>
         $(document).ready(function() {
             console.log("ready");
-            $("#species").change(function(evt) {
+            $("select#species").change(function(evt) {
                 var idSpecies = $("#species").val();
                 var url = "<c:url value="/races?id="/>" + idSpecies;
                 console.log("changed id species:" + idSpecies);
@@ -11,10 +11,10 @@
                     "url" : url,
                     "method" : "get",
                     "success" : function(data) {
-                        $("#races").empty();
+                        $("select#races").empty();
                         console.log(data);
                         for (var key in data) {
-                            $("#races").append(
+                            $("select#races").append(
                                 $("<option>" + data[key].name + "</option>")
                                     .attr("value", data[key].id)
                             )
@@ -34,7 +34,7 @@
 
     <h2>Recherche d'un animal à adopter :</h2>
 
-    <form method="post" action="<c:url value="/animals"/>">
+    <form method="get" action="<c:url value="/animals"/>">
     <select id="species" name="species">
         <c:forEach items="${species}" var="speciesItem">
             <option value="${speciesItem.id}">${speciesItem.name}</option>

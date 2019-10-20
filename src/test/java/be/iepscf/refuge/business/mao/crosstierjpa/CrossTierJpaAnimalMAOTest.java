@@ -14,7 +14,7 @@ class CrossTierJpaAnimalMAOTest {
         Long idChien = 1L;
         Long idBergerAllemand = 24L;
         CrossTierJpaAnimalMAO mao = new CrossTierJpaAnimalMAO();
-        List<Animal> items = mao.getQuery(idChien,idBergerAllemand, 0, 20, true, true, false);
+        List<Animal> items = mao.getQuery(idChien,idBergerAllemand, 0L, 20L, true, true, false);
         assertTrue(items.size() > 0);
         for (Animal item : items) {
             System.out.println(item);
