@@ -1,4 +1,5 @@
 package be.iepscf.refuge.business.service;
+import be.iepscf.refuge.business.businessbean.Animal;
 import be.iepscf.refuge.business.businessbean.ContactRequest;
 import be.iepscf.refuge.business.businessbean.Role;
 import be.iepscf.refuge.business.businessbean.User;
@@ -85,11 +86,29 @@ public class GestionService extends PublicService {
 
 
 
+	/* Contact Request : */
+	@Override
+	public ContactRequest getContactRequests(Long id) {
+		return super.getContactRequests(id);
+	}
 
+	public ContactRequest updateContactRequest(Long id, String firstName, String lastName, String email,
+											   String phone, String message, boolean treated) {
+		ContactRequest contactRequest = getContactRequests(id);
+		if (contactRequest == null) {
+			return null;
+		}
 
+		contactRequest.setFirstName(firstName);
+		contactRequest.setLastName(lastName);
+		contactRequest.setEmail(email);
+		contactRequest.setPhone(phone);
+		contactRequest.setMessage(message);
+		contactRequest.setTreated(treated);
 
-
-
+		long affectedRows = getModelService().updateContactRequest(contactRequest);
+		return contactRequest;
+	}
 
 	public ContactRequest setContactRequestAsTreated(Long id) {
 		ContactRequest contactRequest = getContactRequests(id);
