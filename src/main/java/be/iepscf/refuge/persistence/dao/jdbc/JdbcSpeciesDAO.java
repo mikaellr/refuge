@@ -81,12 +81,12 @@ public class JdbcSpeciesDAO extends JdbcGenericDAO<Species, Long> implements Spe
         return item;
     }
 
-    public Race fetchRace(ResultSet resultSet) throws SQLException {
+    /*public Race fetchRace(ResultSet resultSet) throws SQLException {
         Race item = new Race();
         item.setId(Long.parseLong(resultSet.getString("id")));
         item.setName(resultSet.getString("name"));
         return item;
-    }
+    }*/
 
 
     @Override
