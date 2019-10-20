@@ -1,4 +1,5 @@
 package be.iepscf.refuge.business.service;
+import be.iepscf.refuge.business.businessbean.Animal;
 import be.iepscf.refuge.business.businessbean.ContactRequest;
 import be.iepscf.refuge.business.businessbean.Role;
 import be.iepscf.refuge.business.businessbean.User;
@@ -90,6 +91,9 @@ public class GestionService extends PublicService {
 
 
 
+	public List<ContactRequest> getContactRequestsByAnimal(Animal animal) {
+		return getModelService().getContactRequestsByAnimal(animal);
+	}
 
 	public ContactRequest setContactRequestAsTreated(Long id) {
 		ContactRequest contactRequest = getContactRequests(id);

@@ -211,6 +211,10 @@ public class ModelService {
         return getContactRequestMAO().get();
     }
 
+    public List<ContactRequest> getContactRequestsByAnimal(Animal animal) {
+        return getContactRequestMAO().getByAnimal(animal);
+    }
+
     public long saveContactRequest(ContactRequest contactRequest) {
         return getContactRequestMAO().save(contactRequest);
     }
