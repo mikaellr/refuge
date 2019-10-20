@@ -30,8 +30,8 @@ public class AnimalResource extends BaseResource {
     @Path("")
     public Response all() {
         List<Animal> items = getBeanService().getAnimals();
-        GenericEntity<List<Animal>> usersEntity = new GenericEntity<List<Animal>>(items) {};
-        return Response.status(200).entity(items).build();
+        GenericEntity<List<Animal>> animalsEntity = new GenericEntity<List<Animal>>(items) {};
+        return Response.status(200).entity(animalsEntity).build();
     }
 
     @GET

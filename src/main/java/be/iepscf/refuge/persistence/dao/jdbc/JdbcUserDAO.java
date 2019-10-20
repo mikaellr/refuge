@@ -195,7 +195,7 @@ public class JdbcUserDAO extends JdbcGenericDAO<User, Long> implements UserDAO {
             e.printStackTrace();
         }
         return users;
-    };
+    }
 
 
     @Override

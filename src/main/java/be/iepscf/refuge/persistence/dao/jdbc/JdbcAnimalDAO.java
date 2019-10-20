@@ -228,7 +228,7 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 animal = fetch(resultSet);
             }
             preparedStatement.close();
@@ -241,12 +241,12 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
 
     @Override
     public List<Animal> findAll() {
-        List<Animal> animals = new ArrayList<>();
+        List<Animal> animals = new ArrayList<Animal>();
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Animal animal = fetch(resultSet);
                 animals.add(animal);
             }
@@ -266,7 +266,7 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_SPECIES);
             preparedStatement.setLong(1, species.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Animal animal = fetch(resultSet);
                 animals.add(animal);
             }
@@ -286,7 +286,7 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_RACE);
             preparedStatement.setLong(1, race.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Animal animal = fetch(resultSet);
                 animals.add(animal);
             }
@@ -305,7 +305,7 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_IF_NOT_ADOPTED);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Animal animal = fetch(resultSet);
                 animals.add(animal);
             }
@@ -326,7 +326,7 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
             preparedStatement.setLong(1, species);
             preparedStatement.setLong(2, race);
             preparedStatement.setBoolean(3, is_adopted);
-            if(last){
+            if (last){
                 String descendant = "DESC";
                 preparedStatement.setString(4, descendant);
             }
@@ -358,7 +358,7 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
                 }
             }
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Animal animal = fetch(resultSet);
                 animals.add(animal);
             }

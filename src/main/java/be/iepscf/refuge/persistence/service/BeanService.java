@@ -14,7 +14,7 @@ public class BeanService {
     public static boolean DISALLOW_VOLDEMORT = true;
     public static String DISALLOW_VOLDEMORT_MESSAGE = "Vous avez prononcé le nom de Voldemort.";
     DAOFactory jdbcDAOFactory;
-    DAOFactory voldemortDAOFactory;
+    //DAOFactory voldemortDAOFactory;
 
     protected DAOFactory getDAOFactory() {
         return getJdbcDAOFactory();
@@ -27,7 +27,7 @@ public class BeanService {
         return jdbcDAOFactory;
     }
 
-    protected DAOFactory getVoldemortDAOFactory() {
+    /*protected DAOFactory getVoldemortDAOFactory() {
         if (DISALLOW_VOLDEMORT) {
             throw new RuntimeException(DISALLOW_VOLDEMORT_MESSAGE);
         } else {
@@ -36,7 +36,7 @@ public class BeanService {
             }
             return voldemortDAOFactory;
         }
-    }
+    }*/
 
 
 
