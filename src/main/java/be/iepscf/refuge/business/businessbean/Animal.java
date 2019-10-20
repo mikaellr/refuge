@@ -51,6 +51,11 @@ public class Animal {
 		this(name, null);
 	}
 
+
+
+	public Animal(String name, String description, int birthYear, String sex, boolean sterilized, boolean adoptable, String photoContentType, int photoContentLength, String photoContent, String species, String race, String color) {
+	}
+
 	public String toString() {
 		return "Animal#" + id + " (name=" + name + ", description=" + description
 			+ ", species=" + (species != null ? species.getName() : null)
@@ -111,6 +116,9 @@ public class Animal {
 	}
 	public int getPhotoContentLength() {
 		return photoContentLength;
+	}
+	public void setPhotoContent( byte[] photoContent) {
+		this.photoContent=photoContent;
 	}
 	public void setPhotoContentLength(int photoContentLength) {
 		this.photoContentLength = photoContentLength;
