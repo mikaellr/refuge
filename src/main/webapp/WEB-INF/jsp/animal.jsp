@@ -1,7 +1,4 @@
 
-<c:if test="${sessionScope.user != null}">
-	<a href="<c:url value="/gestion/animal?id=${animal.id}"/>">éditer</a>
-</c:if>
 
 <div class="row" style="padding-bottom:50px">
 </div>
@@ -87,3 +84,17 @@
 		</div>
 	</div>
 </div>
+
+
+<div>
+	<a href="<c:url value="/animals?species=${animal.species.id}"/>">${animal.species.name}</a>
+	<c:if test="${animal.race != null}">
+		/ <a href="<c:url value="/animals?species=${animal.species.id}&race=${animal.race.id}"/>">${animal.race.name}</a>
+	</c:if>
+</div>
+
+
+<c:if test="${sessionScope.user != null}">
+	<h2>Gestion :</h2>
+	<a href="<c:url value="/gestion/animal?id=${animal.id}"/>">éditer</a>
+</c:if>

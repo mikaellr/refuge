@@ -17,9 +17,13 @@ import be.iepscf.refuge.business.service.GestionService;
 import be.iepscf.refuge.business.servlet.gestion.GestionServlet;
 
 
-@WebServlet(name ="AnimalsServlet", urlPatterns ={"/gestion/animals"})
-public class AnimalsAddServlet extends GestionServlet{
+@WebServlet(name ="AnimalAddServlet", urlPatterns ={"/gestion/animal-add"})
+public class AnimalAddServlet extends GestionServlet{
 
+    /**
+     * ajout d'un animal
+     *
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String description = request.getParameter("description");

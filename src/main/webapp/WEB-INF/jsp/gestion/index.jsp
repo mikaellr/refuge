@@ -3,10 +3,15 @@
 
 
     <ul>
-        <li><a href="<c:url value="/gestion/animal-add"/>">Ajout animal</a></li>
-        <li><a href="<c:url value="/gestion/users"/>">Liste utilisateurs</a></li>
-        <li><a href="<c:url value="/gestion/user-add"/>">Ajout utilisateur</a></li>
+        <li><a href="<c:url value="/gestion/users"/>">Liste des utilisateurs</a></li>
+        <li><a href="<c:url value="/gestion/user-add"/>">Ajouter un utilisateur</a></li>
+        <li><a href="<c:url value="/gestion/animals"/>">Liste des animaux</a></li>
+        <li><a href="<c:url value="/gestion/animal-add"/>">Ajouter un animal</a></li>
+        <li><a href="<c:url value="/gestion/contact-requests"/>">Liste des demandes de contact</a></li>
     </ul>
+
+
+
 
     <hr/>
 

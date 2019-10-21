@@ -7,10 +7,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import be.iepscf.refuge.business.businessbean.ContactRequest;
 
-@WebServlet(name = "ContactRequestServlet", urlPatterns = {"/gestion/contact-request"})
+@WebServlet(name = "ContactRequestsServlet", urlPatterns = {"/gestion/contact-requests"})
 //@WebServlet("/gestion/contact-requests")
 public class ContactRequestsServlet extends GestionServlet {
-    @Override
+
+
+    /**
+     * liste des CRs, liens vers fiches
+     *
+     * idéalement, séparer les traitées des non traitées
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id=getLongParameter(request,"id");
         ContactRequest contactRequest= getGestionService().getContactRequests(id);
@@ -21,18 +27,6 @@ public class ContactRequestsServlet extends GestionServlet {
         request.setAttribute("item",contactRequest);
         request.getRequestDispatcher("WEB-INF/jsp/gestion/contact-request.jsp").forward(request, response);
 
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id = getLongParameter(request, "id");
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String message= request.getParameter("message");
-        boolean treated= Boolean.parseBoolean(request.getParameter("treated"));
-        ContactRequest contactRequest = getGestionService().updateContactRequest(id, firstName, lastName, email, phone, message, treated);
-        sendRedirect(response, "/gestion/contact-request");
     }
 
 }
