@@ -1,8 +1,5 @@
 package be.iepscf.refuge.business.service;
-import be.iepscf.refuge.business.businessbean.Animal;
-import be.iepscf.refuge.business.businessbean.ContactRequest;
-import be.iepscf.refuge.business.businessbean.Role;
-import be.iepscf.refuge.business.businessbean.User;
+import be.iepscf.refuge.business.businessbean.*;
 import be.iepscf.refuge.business.util.PasswordManager;
 
 import java.util.List;
@@ -84,6 +81,50 @@ public class GestionService extends PublicService {
 	}
 
 
+	//Animal:
+
+	public Animal getAnimal (Long id){
+		return getModelService().getAnimal(id);
+	}
+
+	public List<Animal> getAnimals(){
+		return getModelService().getAnimals();
+	}
+
+	public Animal addAnimal (String name, String description, int birthYear, String sex, boolean sterilized, boolean adoptable, String photoContentType, int photoContentLength, String photoContent, String species, String race, String color){
+		Animal animal= new Animal(name, description, birthYear, sex, sterilized, adoptable, photoContentType, photoContentLength, photoContent, species, race, color);
+		long lastInsertID = getModelService().saveAnimal(animal);
+		return animal;
+	}
+
+	public Animal updateAnimal(Long id, String name, String description, int birthYear, char sex, boolean sterilized, boolean adoptable, String photoContentType, int photoContentLength, byte[] photoContent, Species species, Race race, Color color){
+		Animal animal = getAnimal(id);
+		if (animal == null) {
+			return null;
+		}
+
+		animal.setName(name);
+		animal.setDescription(description);
+		animal.setBirthYear(birthYear);
+		animal.setSex(sex);
+		animal.setSterilized(sterilized);
+		animal.setAdoptable(adoptable);
+		animal.setPhotoContentType(photoContentType);
+		animal.setPhotoContentLength(photoContentLength);
+		animal.setPhotoContent(photoContent);
+		animal.setSpecies(species);
+		animal.setRace(race);
+		animal.setColor(color);
+
+		long affectedRows = getModelService().updateAnimal(animal);
+		return animal;
+
+	}
+
+	public long deleteAnimal(Long id){
+		Animal animal= getAnimal(id);
+		return getModelService().deleteAnimal(animal);
+	}
 
 
 
@@ -100,6 +141,30 @@ public class GestionService extends PublicService {
 		contactRequest.setTreated(true);
 		long affectedRows = getModelService().updateContactRequest(contactRequest);
 		return contactRequest;
+	}
+
+	public ContactRequest updateContactRequest(Long id, String firstName, String lastName, String email, String phone, String message, boolean treated){
+		ContactRequest contactRequest = getContactRequests(id);
+		if (contactRequest == null) {
+			return null;
+		}
+		contactRequest.setFirstName(firstName);
+		contactRequest.setLastName(lastName);
+		contactRequest.setEmail(email);
+		contactRequest.setPhone(phone);
+		contactRequest.setMessage(message);
+		contactRequest.setTreated(treated);
+
+		long affectedRows = getModelService().updateContactRequest(contactRequest);
+		return contactRequest;
+	}
+
+	public ContactRequest getContactRequest(Long id) {
+		return getModelService().getContactRequest(id);
+	}
+
+	public List<ContactRequest> geContactRequest() {
+		return getModelService().getContactRequest();
 	}
 
 }

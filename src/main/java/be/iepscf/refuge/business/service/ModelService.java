@@ -200,6 +200,16 @@ public class ModelService {
         return getAnimalMAO().getQuery(species, race, offset, limit, last, adoptable, all);
     }
 
+    public long saveAnimal(Animal animal){
+        return getAnimalMAO().save(animal);
+    }
+    public long updateAnimal(Animal animal){
+        return getAnimalMAO().update(animal);
+    }
+    public long deleteAnimal(Animal animal){
+        return getAnimalMAO().delete(animal);
+    }
+
 
 
     /* ContactRequest : */
@@ -222,6 +232,11 @@ public class ModelService {
 
     public long updateContactRequest(ContactRequest contactRequest) {
         return getContactRequestMAO().update(contactRequest);
+    }
+
+
+    public List<ContactRequest> getContactRequest() {
+        return getContactRequestMAO().get();
     }
 
 }
