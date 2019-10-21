@@ -63,7 +63,7 @@ Thumbs.db
 # Compiled class file
 *.class
 
-# Log file
+# Logger file
 *.log
 
 # BlueJ files

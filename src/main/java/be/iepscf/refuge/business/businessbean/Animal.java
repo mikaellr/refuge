@@ -61,7 +61,7 @@ public class Animal {
 			+ ", species=" + (species != null ? species.getName() : null)
 			+ ", race=" + (race != null ? race.getName() : null)
 			+ ", color=" + (color != null ? color.getName() : null)
-			+ ", adoptable=" + adoptable + ", sterilized=" + sterilized
+			+ ", sex=" + sex + ", adoptable=" + adoptable + ", sterilized=" + sterilized
 			+ ", photo=" + (photoContent != null ? photoContent.length : null) + ", photoContentType=" + photoContentType + ", photoContentLength=" + photoContentLength
 			+ ", contactRequets=" + contactRequests.size()
 			+ ")";

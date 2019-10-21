@@ -1,17 +1,20 @@
 
 
+<c:if test="${usermsg != null}">
+    ${usermsg}
+</c:if>
+
 <h2>Ajout utilisateur</h2>
 
 <form class="std" method="post" action="<c:url value="/gestion/user-add"/>">
-    <input type="hidden" name="id" value="${item.id}"/>
     <label>Prénom:</label>
-    <input type="text" name="firstName" value="${item.firstName}"/>
+    <input type="text" name="firstName" value="${firstName}"/>
     <label>Nom: </label>
-    <input type="text" name="lastName" value="${item.lastName}"/>
+    <input type="text" name="lastName" value="${lastName}"/>
     <label>Email: </label>
-    <input type="text" name="email" value="${item.email}"/>
+    <input type="text" name="email" value="${email}"/>
     <label>Phone: </label>
-    <input type="text" name="phone" value="${item.phone}"/>
+    <input type="text" name="phone" value="${phone}"/>
     <label>Mot de passe: </label>
     <input type="password" name="password" value=""/>
     <label>Confirm:</label>

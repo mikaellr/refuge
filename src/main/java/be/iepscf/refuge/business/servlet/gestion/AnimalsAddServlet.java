@@ -27,7 +27,7 @@ public class AnimalsAddServlet extends GestionServlet{
 
         String sex = request.getParameter("sex");
 
-        Long id = getParameter(request, "id");
+        Long id = getLongParameter(request, "id");
         boolean sterilized = Boolean.parseBoolean(request.getParameter("sterilized"));
         boolean adoptable = Boolean.parseBoolean(request.getParameter("adoptable"));
         String photoContentType= request.getParameter("photoContentType");

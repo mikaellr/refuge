@@ -21,16 +21,4 @@ public class UserListServlet extends GestionServlet {
         request.getRequestDispatcher("/WEB-INF/jsp/gestion/users.jsp").forward(request, response);
     }
 
-    // ajout d'un user
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String password = request.getParameter("password");
-        String confirm = request.getParameter("confirm");
-        User user = getGestionService().addUser(firstName, lastName, email, phone, password, confirm);
-        sendRedirect(response, "/gestion/users");
-    }
-
 }

@@ -1,6 +1,8 @@
 package be.iepscf.refuge.business.servlet.gestion;
 
 import be.iepscf.refuge.business.businessbean.User;
+import be.iepscf.refuge.business.servlet.exception.UnconfirmedPasswordException;
+import be.iepscf.refuge.business.servlet.util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,8 @@ import java.io.IOException;
 
 @WebServlet(name = "UserAddServlet", urlPatterns = {"/gestion/user-add"})
 public class UserAddServlet extends GestionServlet {
+
+    public static String UNCONFIRMED_PASSWORD_MESSAGE = "échec confirmation mot de passe";
 
     // formulaire ajout
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,7 +28,19 @@ public class UserAddServlet extends GestionServlet {
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         String confirm = request.getParameter("confirm");
-        User user = getGestionService().addUser(firstName, lastName, email, phone, password, confirm);
+        try {
+            User user = getGestionService().addUser(firstName, lastName, email, phone, password, confirm);
+        } catch (UnconfirmedPasswordException e) {
+            // réaffichage formulaire avec message d'erreur à l'utilisateur :
+            Logger.getLogger().debug("unconfirmed password");
+            request.setAttribute("usermsg", UNCONFIRMED_PASSWORD_MESSAGE);
+            request.setAttribute("firstName", firstName);
+            request.setAttribute("lastName", lastName);
+            request.setAttribute("email", email);
+            request.setAttribute("phone", phone);
+            request.getRequestDispatcher("/WEB-INF/jsp/gestion/user-add.jsp").forward(request, response);
+            return;
+        }
         sendRedirect(response, "/gestion/users");
     }
 

@@ -5,9 +5,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
-
-import be.iepscf.refuge.business.businessbean.Animal;
 import be.iepscf.refuge.business.businessbean.ContactRequest;
 
 @WebServlet(name = "ContactRequestServlet", urlPatterns = {"/gestion/contact-request"})
@@ -15,7 +12,7 @@ import be.iepscf.refuge.business.businessbean.ContactRequest;
 public class ContactRequestsServlet extends GestionServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id=getParameter(request,"id");
+        Long id=getLongParameter(request,"id");
         ContactRequest contactRequest= getGestionService().getContactRequests(id);
         if (contactRequest==null){
             send404(request,response,String.format("Contact requestnumber # not found",id));
@@ -27,7 +24,7 @@ public class ContactRequestsServlet extends GestionServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id = getParameter(request, "id");
+        Long id = getLongParameter(request, "id");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");

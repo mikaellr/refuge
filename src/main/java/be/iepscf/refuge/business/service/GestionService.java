@@ -1,5 +1,6 @@
 package be.iepscf.refuge.business.service;
 import be.iepscf.refuge.business.businessbean.*;
+import be.iepscf.refuge.business.servlet.exception.UnconfirmedPasswordException;
 import be.iepscf.refuge.business.util.PasswordManager;
 
 import java.util.List;
@@ -33,15 +34,14 @@ public class GestionService extends PublicService {
 		return getModelService().getUsers();
 	}
 
-	public User addUser(String firstName, String lastName, String email, String phone, String password, String confirm) {
+	public User addUser(String firstName, String lastName, String email, String phone, String password, String confirm) throws UnconfirmedPasswordException {
 		Role employe = getRole(1L);
 		User user = new User(null, firstName, lastName, email, phone, null, null, true, employe);
 		password = password.trim();
 		confirm = confirm.trim();
 		// + verif nulls etc
 		if (! password.equals(confirm)) {
-			System.err.println("erreur password confirm");
-			return null;
+			throw new UnconfirmedPasswordException();
 		}
 		getPasswordManager().setUserPassword(user, password);
 		long lastInsertId = getModelService().saveUser(user);

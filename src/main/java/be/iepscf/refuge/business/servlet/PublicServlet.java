@@ -1,19 +1,24 @@
 package be.iepscf.refuge.business.servlet;
 
-import be.iepscf.refuge.business.businessbean.Race;
-import be.iepscf.refuge.business.businessbean.Species;
+import be.iepscf.refuge.business.businessbean.*;
 import be.iepscf.refuge.business.service.PublicService;
 import be.iepscf.refuge.business.service.ServiceFactory;
+import be.iepscf.refuge.business.servlet.util.Logger;
+import org.hibernate.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * servlet abstraite de base pour toutes les servlets servant de contrôlleur à une action visiteur (utilisateur non connecté)
@@ -32,6 +37,26 @@ public abstract class PublicServlet extends HttpServlet {
 
     }
 
+
+    public User getUser(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            if (user instanceof User) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public boolean hasUser(HttpServletRequest request) {
+        User user = getUser(request);
+        if (user instanceof User) {
+            return true;
+        }
+        return false;
+
+    }
 
 
     public PublicService getPublicService() {
@@ -132,6 +157,39 @@ public abstract class PublicServlet extends HttpServlet {
     }
 
 
+    protected Animal getAnimalParameter(HttpServletRequest request, String name) {
+        String idAnimal = request.getParameter(name);
+        if (idAnimal != null) {
+            Long id;
+            try {
+                id = Long.parseLong(idAnimal);
+            } catch (NumberFormatException e) {
+                id = null;
+            }
+            if (id != null && id != 0) {
+                Animal item = getPublicService().getAnimal(id);
+                if (item != null) {
+                    return item;
+                }
+            }
+        }
+        return null;
+    }
+
+
+
+
+
+
+
+
+    protected String uriEncode(String value) {
+        try {
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException ex) {
+            return null;
+        }
+    }
 
     /* récupère contenu textuel d'une URL, si besoin pour requêtes artisanales sans framework */
     public String retrieve(String url) throws IOException {
