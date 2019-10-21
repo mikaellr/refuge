@@ -8,11 +8,11 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public class GenericHibernateDAO<E, ID extends Serializable> implements GenericDAO<E, ID> {
+public class VoldemortGenericDAO<E, ID extends Serializable> implements GenericDAO<E, ID> {
 
 	private Class<E> entityClass;
 	
-	public GenericHibernateDAO() {
+	public VoldemortGenericDAO() {
 		entityClass = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 	

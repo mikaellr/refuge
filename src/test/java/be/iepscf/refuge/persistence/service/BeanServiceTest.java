@@ -1,8 +1,8 @@
 package be.iepscf.refuge.persistence.service;
 
-import be.iepscf.refuge.persistence.entitybean.Role;
-import be.iepscf.refuge.persistence.entitybean.Species;
-import be.iepscf.refuge.persistence.entitybean.User;
+import be.iepscf.refuge.BaseTest;
+import be.iepscf.refuge.persistence.dao.*;
+import be.iepscf.refuge.persistence.entitybean.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -10,21 +10,54 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BeanServiceTest {
+class BeanServiceTest extends BaseTest {
 
     BeanService service = new BeanService();
 
-    /**
-     * creates random User object for use in a test
-     */
-    protected User createUser(String firstName, String lastName) {
-        String email = firstName+"."+lastName+"." + (new Date()).getTime()  +"@gmail.com";
-        User user = new User(null, firstName, lastName, email, null, "xxx", "xxx", true,
-                new Role(1L, "Employé", "Les employés du refuge"));
-        return user;
+    /* DAOs : */
+    @Test
+    public void testGetUserDAO() {
+        UserDAO dao = service.getUserDAO();
+        assert(dao instanceof  UserDAO);
     }
 
+    @Test
+    public void testGetRoleDAO() {
+        RoleDAO dao = service.getRoleDAO();
+        assert(dao instanceof  RoleDAO);
+    }
 
+    @Test
+    public void testGetAnimalDAO() {
+        AnimalDAO dao = service.getAnimalDAO();
+        assert(dao instanceof  AnimalDAO);
+    }
+
+    @Test
+    public void testGetSpeciesDAO() {
+        SpeciesDAO dao = service.getSpeciesDAO();
+        assert(dao instanceof  SpeciesDAO);
+    }
+    
+    @Test
+    public void testGetRaceDAO() {
+        RaceDAO dao = service.getRaceDAO();
+        assert(dao instanceof  RaceDAO);
+    }
+    
+    @Test
+    public void testGetColorDAO() {
+        ColorDAO dao = service.getColorDAO();
+        assert(dao instanceof  ColorDAO);
+    }
+    
+    @Test
+    public void testGetContactRequestDAO() {
+        ContactRequestDAO dao = service.getContactRequestDAO();
+        assert(dao instanceof  ContactRequestDAO);
+    }
+    
+    
 
     /* User : */
 
@@ -53,7 +86,6 @@ class BeanServiceTest {
         }
     }
 
-
     @Test
     public void testSaveUser() {
         User user = createUser("Antony", "KJK");
@@ -76,9 +108,8 @@ class BeanServiceTest {
         assertEquals(newName, user2.getLastName());
     }
 
-
     @Test
-    void deleteUser() {
+    void testDeleteUser() {
         User user = createUser("Antony", "KJK");
         long lastInsertId = service.saveUser(user);
         User user2 = service.getUser(lastInsertId);
@@ -114,6 +145,69 @@ class BeanServiceTest {
         assertTrue(items.size() > 0);
         for (Species item : items) {
             assertTrue((item instanceof Species));
+        }
+    }
+
+
+
+
+
+    /* Race : */
+
+    @Test
+    void testGetRacesBySpecies() {
+        Species species = getSpeciesHavingRaces();
+        List<Race> items = service.getRacesBySpecies(species);
+        assertTrue(items.size() > 0);
+        for (Race item : items) {
+            assertTrue((item instanceof Race));
+            assertEquals(item.getSpecies().getId(), species.getId());
+        }
+    }
+
+
+
+    /* Color : */
+
+    @Test
+    void testGetColors() {
+        List<Color> items = service.getColors();
+        assertTrue(items.size() > 0);
+        for (Color item : items) {
+            assertTrue((item instanceof Color));
+        }
+    }
+
+
+
+
+    /* ContactRequest : */
+
+    @Test
+    void testGetContactRequest() {
+        Long id = 1L;
+        ContactRequest item = service.getContactRequest(id);
+        assertTrue(item instanceof ContactRequest);
+        assertEquals(id, item.getId());
+    }
+
+    @Test
+    void testGetContactRequests() {
+        List<ContactRequest> items = service.getContactRequests();
+        assertTrue(items.size() > 0);
+        for (ContactRequest item : items) {
+            assertTrue(item instanceof ContactRequest);
+        }
+    }
+
+    @Test
+    void testGetContactRequestsByAnimal() {
+        Animal animal = getAnimalHavingContactRequests();
+        List<ContactRequest> items = service.getContactRequestsByAnimal(animal);
+        assertTrue(items.size() > 0);
+        for (ContactRequest item : items) {
+            assertTrue(item instanceof ContactRequest);
+            assertEquals(animal.getId(), item.getAnimal().getId());
         }
     }
 

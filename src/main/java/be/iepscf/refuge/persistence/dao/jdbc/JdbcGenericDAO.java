@@ -23,7 +23,7 @@ import java.util.Properties;
  * @param <E>
  * @param <ID>
  */
-public class JdbcGenericDAO<E, ID extends Serializable> implements GenericDAO<E, ID> {
+public abstract class JdbcGenericDAO<E, ID extends Serializable> implements GenericDAO<E, ID> {
 
 	private Connection connection;
 	private Class<E> beanClass;
@@ -75,6 +75,8 @@ public class JdbcGenericDAO<E, ID extends Serializable> implements GenericDAO<E,
 		}
 		return null;
 	}
+
+
 
 	public void closeConnection() {
 		if (connection != null) {

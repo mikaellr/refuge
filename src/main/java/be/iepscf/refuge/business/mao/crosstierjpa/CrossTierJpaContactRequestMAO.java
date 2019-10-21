@@ -1,5 +1,6 @@
 package be.iepscf.refuge.business.mao.crosstierjpa;
 
+import be.iepscf.refuge.business.businessbean.Animal;
 import be.iepscf.refuge.business.businessbean.ContactRequest;
 import be.iepscf.refuge.business.mao.ContactRequestMAO;
 
@@ -32,4 +33,8 @@ public class CrossTierJpaContactRequestMAO extends CrossTierJpaGenericMAO<Contac
         return getBeanService().deleteContactRequest(conv(entity));
     }
 
+    @Override
+    public List<ContactRequest> getByAnimal(Animal animal) {
+        return convContactRequests(getBeanService().getContactRequestsByAnimal(conv(animal)));
+    }
 }

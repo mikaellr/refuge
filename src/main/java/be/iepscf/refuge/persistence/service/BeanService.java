@@ -1,17 +1,19 @@
 package be.iepscf.refuge.persistence.service;
 
 import be.iepscf.refuge.persistence.dao.jdbc.JdbcDAOFactory;
-import be.iepscf.refuge.persistence.dao.voldemort.VoldemortDAOFactory;
 import be.iepscf.refuge.persistence.entitybean.*;
 import be.iepscf.refuge.persistence.dao.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class BeanService {
 
+    public static boolean DISALLOW_VOLDEMORT = true;
+    public static String DISALLOW_VOLDEMORT_MESSAGE = "Vous avez prononcé le nom de Voldemort.";
     DAOFactory jdbcDAOFactory;
-    DAOFactory voldemortDAOFactory;
+    //DAOFactory voldemortDAOFactory;
 
     protected DAOFactory getDAOFactory() {
         return getJdbcDAOFactory();
@@ -19,17 +21,21 @@ public class BeanService {
 
     protected DAOFactory getJdbcDAOFactory() {
         if (jdbcDAOFactory == null) {
-             jdbcDAOFactory = DAOFactory.getDAOFactory(JdbcDAOFactory.class);
+            jdbcDAOFactory = DAOFactory.getDAOFactory(JdbcDAOFactory.class);
         }
         return jdbcDAOFactory;
     }
 
-    protected DAOFactory getVoldemortDAOFactory() {
-        if (voldemortDAOFactory == null) {
-            voldemortDAOFactory =  DAOFactory.getDAOFactory(VoldemortDAOFactory.class);
+    /*protected DAOFactory getVoldemortDAOFactory() {
+        if (DISALLOW_VOLDEMORT) {
+            throw new RuntimeException(DISALLOW_VOLDEMORT_MESSAGE);
+        } else {
+            if (voldemortDAOFactory == null) {
+                voldemortDAOFactory = DAOFactory.getDAOFactory(VoldemortDAOFactory.class);
+            }
+            return voldemortDAOFactory;
         }
-        return voldemortDAOFactory;
-    }
+    }*/
 
 
 
@@ -39,32 +45,32 @@ public class BeanService {
     (tests unitaires sur ses méthodes, idéalement) */
 
     public UserDAO getUserDAO() {
-        return (UserDAO) getDAOFactory().getUserDAO();
+        return getDAOFactory().getUserDAO();
     }
 
     public RoleDAO getRoleDAO() {
-        return (RoleDAO) getVoldemortDAOFactory().getRoleDAO();
-    };
+        return getDAOFactory().getRoleDAO();
+    }
 
     public AnimalDAO getAnimalDAO() {
-        return (AnimalDAO) getVoldemortDAOFactory().getAnimalDAO();
+        return getDAOFactory().getAnimalDAO();
     }
 
     public SpeciesDAO getSpeciesDAO() {
-        return (SpeciesDAO) getVoldemortDAOFactory().getSpeciesDAO();
+        return getDAOFactory().getSpeciesDAO();
     }
 
     public RaceDAO getRaceDAO() {
-        return (RaceDAO) getVoldemortDAOFactory().getRaceDAO();
-    };
+        return getDAOFactory().getRaceDAO();
+    }
 
     public ColorDAO getColorDAO() {
-        return (ColorDAO) getVoldemortDAOFactory().getColorDAO();
-    };
+        return getDAOFactory().getColorDAO();
+    }
 
     public ContactRequestDAO getContactRequestDAO() {
-        return (ContactRequestDAO) getVoldemortDAOFactory().getContactRequestDAO();
-    };
+        return getDAOFactory().getContactRequestDAO();
+    }
 
 
 
@@ -136,6 +142,18 @@ public class BeanService {
         return getAnimalDAO().findAll();
     }
 
+    public List<Animal> getAnimalsByParameters(Long species, Long race, Boolean is_adopted, Boolean all, Boolean last, Long limit, Long offset) {
+        return getAnimalDAO().findMultiParameters(species, race, is_adopted, all, last, limit, offset);
+    }
+
+    public List<Animal> getAnimalsBySpecies(Long id) {
+        return getAnimalDAO().findBySpecies(id);
+    }
+
+    public List<Animal> getAnimalsByRaces(Long id) {
+        return getAnimalDAO().findByRace(id);
+    }
+
     public long saveAnimal(Animal item) {
         return getAnimalDAO().save(item);
     }
@@ -160,9 +178,7 @@ public class BeanService {
         return getSpeciesDAO().findByName(name);
     }
 
-    public List<Species> getSpecies() {
-        return getSpeciesDAO().findAll();
-    }
+    public List<Species> getSpecies() { return getSpeciesDAO().findAll(); }
 
     public long saveSpecies(Species item) {
         return getSpeciesDAO().save(item);
@@ -188,6 +204,18 @@ public class BeanService {
         return getRaceDAO().findAll();
     }
 
+    public List<Race> getRacesBySpecies(Species species) {
+        return getRaceDAO().findBySpecies(species);
+    }
+
+    public List<Race> getRacesBySpecies(Long id) {
+        Species species = getSpecies(id);
+        if (species == null) {
+            return new ArrayList<Race>();
+        }
+        return getRacesBySpecies(species);
+    }
+
     public long saveRace(Race item) {
         return getRaceDAO().save(item);
     }
@@ -199,7 +227,6 @@ public class BeanService {
     public long deleteRace(Race item) {
         return getRaceDAO().delete(item);
     }
-
 
 
 
@@ -231,6 +258,7 @@ public class BeanService {
 
 
 
+
     /* ContactRequest : */
 
     public ContactRequest getContactRequest(Long id) {
@@ -239,6 +267,10 @@ public class BeanService {
 
     public List<ContactRequest> getContactRequests() {
         return getContactRequestDAO().findAll();
+    }
+
+    public List<ContactRequest> getContactRequestsByAnimal(Animal animal) {
+        return getContactRequestDAO().findByAnimal(animal);
     }
 
     public long saveContactRequest(ContactRequest item) {

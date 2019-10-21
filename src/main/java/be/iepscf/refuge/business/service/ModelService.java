@@ -27,6 +27,7 @@ public class ModelService {
     }
 
     public MAOFactory getCrossTierJpaMAOFactory() {
+
         if (crossTierJpaMAOFactory == null) {
             crossTierJpaMAOFactory = new CrossTierJpaMAOFactory();
         }
@@ -191,11 +192,11 @@ public class ModelService {
         return getAnimalMAO().get();
     }
 
-    public List<Animal> getAnimalsQuery(Species species, Race race, long offset, long limit, boolean last, boolean adoptable, boolean all) {
+    public List<Animal> getAnimalsQuery(Species species, Race race, Long offset, Long limit, Boolean last, Boolean adoptable, Boolean all) {
         return getAnimalMAO().getQuery(species, race, offset, limit, last, adoptable, all);
     }
 
-    public List<Animal> getAnimalsQuery(long species, long race, long offset, long limit, boolean last, boolean adoptable, boolean all) {
+    public List<Animal> getAnimalsQuery(Long species, Long race, Long offset, Long limit, Boolean last, Boolean adoptable, Boolean all) {
         return getAnimalMAO().getQuery(species, race, offset, limit, last, adoptable, all);
     }
 
@@ -219,6 +220,10 @@ public class ModelService {
 
     public List<ContactRequest> getContactRequests() {
         return getContactRequestMAO().get();
+    }
+
+    public List<ContactRequest> getContactRequestsByAnimal(Animal animal) {
+        return getContactRequestMAO().getByAnimal(animal);
     }
 
     public long saveContactRequest(ContactRequest contactRequest) {

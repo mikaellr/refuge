@@ -1,5 +1,7 @@
 package be.iepscf.refuge.business.servlet;
 
+import be.iepscf.refuge.business.businessbean.Race;
+import be.iepscf.refuge.business.businessbean.Species;
 import be.iepscf.refuge.business.service.PublicService;
 import be.iepscf.refuge.business.service.ServiceFactory;
 
@@ -51,9 +53,85 @@ public abstract class PublicServlet extends HttpServlet {
         //request.getRequestDispatcher("/notfound.jpg").forward(request, response);
     }
 
-    protected Long getParameter(HttpServletRequest request, String name) {
-        return Long.parseLong(request.getParameter("id"));
+    protected Long getLongParameter(HttpServletRequest request, String name, Long defval) {
+        String param = request.getParameter(name);
+        if (param != null) {
+            return Long.parseLong(param);
+        }
+        return defval;
     }
+
+    protected Long getLongParameter(HttpServletRequest request, String name) {
+        return getLongParameter(request, name, null);
+    }
+
+    protected Long getParameter(HttpServletRequest request, String name, Long defval) {
+        return getLongParameter(request, name, defval);
+    }
+
+    protected Boolean getBooleanParameter(HttpServletRequest request, String name, Boolean defval) {
+        String param = request.getParameter(name);
+        if (param != null) {
+            if (param.trim().equals("1")) {
+                return true;
+            } else {
+                return Boolean.parseBoolean(param);
+            }
+        }
+        return defval;
+    }
+
+    protected Boolean getBooleanParameter(HttpServletRequest request, String name) {
+        return getBooleanParameter(request, name, null);
+    }
+
+    protected Species getSpeciesParameter(HttpServletRequest request, String name) {
+        String idSpecies = request.getParameter(name);
+        if (idSpecies != null) {
+            Long id;
+            try {
+                id = Long.parseLong(idSpecies);
+            } catch (NumberFormatException e) {
+                id = null;
+            }
+            if (id != null && id != 0) {
+                Species species = getPublicService().getSpecies(id);
+                if (species != null) {
+                    return species;
+                }
+            }
+        }
+        return null;
+    }
+
+    protected Species getSpeciesParameter(HttpServletRequest request) {
+        return getSpeciesParameter(request, "species");
+    }
+
+    protected Race getRaceParameter(HttpServletRequest request, String name) {
+        String idRace = request.getParameter(name);
+        if (idRace != null) {
+            Long id;
+            try {
+                id = Long.parseLong(idRace);
+            } catch (NumberFormatException e) {
+                id = null;
+            }
+            if (id != null && id != 0) {
+                Race race = getPublicService().getRace(id);
+                if (race != null) {
+                    return race;
+                }
+            }
+        }
+        return null;
+    }
+
+    protected Race getRaceParameter(HttpServletRequest request) {
+        return getRaceParameter(request, "race");
+    }
+
+
 
     /* récupère contenu textuel d'une URL, si besoin pour requêtes artisanales sans framework */
     public String retrieve(String url) throws IOException {

@@ -17,12 +17,20 @@ public class IndexResource extends BaseResource {
     public Response sayHello() {
         String baseUrl = "/refuge/rest/";
         String urls[] = {
-                "user",
-                "user/12",
-                "animal",
-                "animal/4",
-                "species/id-14",
-                "species/name-Chats",
+                "users",
+                "users/12",
+                "animals",
+                "animals/4",
+                "species",
+                "species/2",
+                "species/2/races",
+                "races/45",
+                "colors",
+                "colors/17",
+                "roles",
+                "roles/1",
+                "contact-requests",
+                "contact-requests/4",
         };
         String output = "<h1>Annuaire des resources Rest<h1><ul>";
         for (String url : urls) {

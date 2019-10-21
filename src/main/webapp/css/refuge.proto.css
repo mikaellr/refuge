@@ -1,10 +1,4 @@
-* {
-	box-sizing: border-box;
-}
 
-html, body {
-	background: #764;
-}
 
 a.thumbnail {
 	display: inline-block;

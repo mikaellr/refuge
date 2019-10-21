@@ -15,7 +15,7 @@ public class UserServlet extends GestionServlet {
 
     // affichage formulaire edit du user
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id = getParameter(request, "id");
+        Long id = getLongParameter(request, "id");
         User user = getGestionService().getUser(id);
         if (user == null) {
             send404(request, response, String.format("User# not found", id));
@@ -31,7 +31,7 @@ public class UserServlet extends GestionServlet {
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        Long id = getParameter(request, "id");
+        Long id = getLongParameter(request, "id");
         User user = getGestionService().updateUser(id, firstName, lastName, email, phone);
         sendRedirect(response, "/gestion/users");
     }

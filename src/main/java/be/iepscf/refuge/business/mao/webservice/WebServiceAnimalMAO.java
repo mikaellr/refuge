@@ -8,13 +8,15 @@ import be.iepscf.refuge.business.mao.AnimalMAO;
 import java.util.List;
 
 public class WebServiceAnimalMAO extends WebServiceGenericMAO<Animal, Long> implements AnimalMAO {
+
     @Override
-    public List<Animal> getQuery(Species species, Race race, long offset, long limit, boolean last, boolean adoptable, boolean all) {
+    public List<Animal> getQuery(Species species, Race race, Long offset, Long limit, Boolean last, Boolean adoptable, Boolean all) {
         return null;
     }
 
     @Override
-    public List<Animal> getQuery(Long species, Long race, long offset, long limit, boolean last, boolean adoptable, boolean all) {
+    public List<Animal> getQuery(Long species, Long race, Long offset, Long limit, Boolean last, Boolean adoptable, Boolean all) {
         return null;
     }
+
 }

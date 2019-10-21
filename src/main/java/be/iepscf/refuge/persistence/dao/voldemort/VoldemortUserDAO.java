@@ -13,7 +13,7 @@ import javax.persistence.NoResultException;
  *
  *
  */
-public class VoldemortUserDAO extends GenericHibernateDAO<User, Long> implements UserDAO {
+public class VoldemortUserDAO extends VoldemortGenericDAO<User, Long> implements UserDAO {
 
 	@Override
 	public User findByEmail(String email) {

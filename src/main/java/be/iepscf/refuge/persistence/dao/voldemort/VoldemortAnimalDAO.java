@@ -3,7 +3,30 @@ package be.iepscf.refuge.persistence.dao.voldemort;
 
 import be.iepscf.refuge.persistence.dao.AnimalDAO;
 import be.iepscf.refuge.persistence.entitybean.Animal;
+import be.iepscf.refuge.persistence.entitybean.Race;
+import be.iepscf.refuge.persistence.entitybean.Species;
 
-public class VoldemortAnimalDAO extends GenericHibernateDAO<Animal, Long> implements AnimalDAO {
+import java.util.List;
 
+public class VoldemortAnimalDAO extends VoldemortGenericDAO<Animal, Long> implements AnimalDAO {
+
+    @Override
+    public List<Animal> findBySpecies(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<Animal> findByRace(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<Animal> findNonAdoptable() {
+        return null;
+    }
+
+    @Override
+    public List<Animal> findMultiParameters(Long species, Long race, Boolean is_adopted, Boolean all, Boolean last, Long limit, Long offset) {
+        return null;
+    }
 }

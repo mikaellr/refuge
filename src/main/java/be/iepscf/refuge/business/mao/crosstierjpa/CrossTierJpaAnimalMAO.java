@@ -36,24 +36,15 @@ public class CrossTierJpaAnimalMAO extends CrossTierJpaGenericMAO<Animal, Long> 
     }
 
     @Override
-    public List<Animal> getQuery(Species species, Race race, long offset, long limit, boolean last, boolean adoptable, boolean all) {
-        return getQuery(species.getId(), race.getId(), offset, limit, last, adoptable, all);
+    public List<Animal> getQuery(Species species, Race race, Long offset, Long limit, Boolean last, Boolean adoptable, Boolean all) {
+        Long speciesId = species != null ? species.getId() : null;
+        Long raceId = race != null ? race.getId() : null;
+        return getQuery(speciesId, raceId, offset, limit, last, adoptable, all);
     }
 
     @Override
-    public List<Animal> getQuery(Long species, Long race, long offset, long limit, boolean last, boolean adoptable, boolean all) {
-        List<Animal> animals = get();
-        List<Animal> filtered = new ArrayList<Animal>();
-        for (Animal item : animals)  {
-            if (species != null && item.getSpecies().getId() != species) {
-                continue;
-            }
-            if (race != null && (item.getRace() == null || item.getRace().getId() != race)) {
-                continue;
-            }
-            filtered.add(item);
-        }
-        return filtered;
+    public List<Animal> getQuery(Long species, Long race, Long offset, Long limit, Boolean last, Boolean adoptable, Boolean all) {
+        return convAnimals(getBeanService().getAnimalsByParameters(species, race, adoptable, all, last, limit, offset));
     }
 
 }

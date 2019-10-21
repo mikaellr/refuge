@@ -1,5 +1,6 @@
 package be.iepscf.refuge.persistence.resource;
 
+import be.iepscf.refuge.persistence.entitybean.Race;
 import be.iepscf.refuge.persistence.entitybean.Species;
 
 import javax.ws.rs.GET;
@@ -16,7 +17,6 @@ import java.util.List;
 public class SpeciesResource extends BaseResource {
 
     @GET
-    @Path("/")
     public Response all() {
         List<Species> items = getBeanService().getSpecies();
         GenericEntity<List<Species>> entities = new GenericEntity<List<Species>>(items) {};
@@ -27,7 +27,17 @@ public class SpeciesResource extends BaseResource {
     @Path("/{id}")
     public Response one(@PathParam("id") Long id) {
         Species item = getBeanService().getSpecies(id);
+        if (item == null) {
+            notFound();
+        }
         return Response.status(200).entity(item).build();
+    }
+
+    @GET
+    @Path("/{id}/races")
+    public Response racesBySpecies(@PathParam("id") Long id) {
+        List<Race> result = getBeanService().getRacesBySpecies(id);
+        return Response.status(200).entity(result).build();
     }
 
 }

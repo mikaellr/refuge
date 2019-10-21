@@ -132,6 +132,9 @@ public class GestionService extends PublicService {
 
 
 
+	public List<ContactRequest> getContactRequestsByAnimal(Animal animal) {
+		return getModelService().getContactRequestsByAnimal(animal);
+	}
 
 	public ContactRequest setContactRequestAsTreated(Long id) {
 		ContactRequest contactRequest = getContactRequests(id);

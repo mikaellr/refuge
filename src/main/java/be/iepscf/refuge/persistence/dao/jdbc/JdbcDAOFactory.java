@@ -11,19 +11,19 @@ public class JdbcDAOFactory extends DAOFactory {
     }
 
     public ColorDAO getColorDAO() {
-        return null;
+        return new JdbcColorDAO();
     }
 
     public ContactRequestDAO getContactRequestDAO(){
-        return null;
+        return new JdbcContactRequestDAO();
     }
 
     public RaceDAO getRaceDAO(){
-        return null;
+        return new JdbcRaceDAO();
     }
 
     public RoleDAO getRoleDAO(){
-        return null;
+        return new JdbcRoleDAO();
     }
 
     public SpeciesDAO getSpeciesDAO(){

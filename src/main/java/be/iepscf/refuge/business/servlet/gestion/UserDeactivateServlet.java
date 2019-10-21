@@ -13,7 +13,7 @@ import java.io.IOException;
 public class UserDeactivateServlet extends GestionServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id = getParameter(request, "id");
+        Long id = getLongParameter(request, "id");
         ServiceFactory.getGestionService().deactivateUser(id);
         sendRedirect(response, "/gestion/users");
     }
