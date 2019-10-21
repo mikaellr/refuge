@@ -14,7 +14,7 @@ public class WebServiceUserMAO extends WebServiceGenericMAO<User, Long> implemen
 
     @Override
     public List<User> get()  {
-        System.out.println("retrieving list of user by ws");
+        debug("retrieving list of user by ws");
         Client client = ClientBuilder.newClient( new ClientConfig());
         WebTarget webTarget = client.target(targetUrl).path("users");
         Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
@@ -31,11 +31,33 @@ public class WebServiceUserMAO extends WebServiceGenericMAO<User, Long> implemen
 
         Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
         Response resp = invocationBuilder.get();
+        debug("wsc user get : status = " + resp.getStatus());
+        if (resp.getStatus() == 200) {
+           User user = resp.readEntity(User.class);
+           if (user != null) {
+               debug("wsc user get : user = " + user);
+               return user;
+           }
+        }
+        return null;
+    }
 
-        User user = resp.readEntity(User.class);
-        System.out.println("user status:" + resp.getStatus());
-        System.out.println("user:" + user);
-        return user;
+    @Override
+    public User getByEmail(String email) {
+        Client client = ClientBuilder.newClient( new ClientConfig());
+        WebTarget webTarget = client.target(targetUrl).path("users").path("email").path(email);
+        //WebTarget helloworldWebTargetWithQueryParam =                webTarget.queryParam("greeting", "Hi World!");
+        Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
+        Response resp = invocationBuilder.get();
+        debug("wsc user getByEmail : status = " + resp.getStatus());
+        if (resp.getStatus() == 200) {
+            User user = resp.readEntity(User.class);
+            if (user != null) {
+                debug("wsc user getByEmail : user = " + user);
+                return user;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -47,11 +69,17 @@ public class WebServiceUserMAO extends WebServiceGenericMAO<User, Long> implemen
         Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.post(Entity.entity(user, MediaType.APPLICATION_JSON));
 
-        System.out.println("saveUser status : " + response.getStatus());
-        //System.out.println("saveUser response : " + response.readEntity(String.class));
-        Long id = response.readEntity(Long.class);
-
-        return id;
+        debug("wsc user mao save : status = " + response.getStatus());
+        //debug("saveUser response : " + response.readEntity(String.class));
+        if (response.getStatus() == 200) {
+            long id = response.readEntity(Long.class);
+            if (id > 0) {
+                debug("wsc user mao save id: id = " + id);
+                user.setId(id);
+                return id;
+            }
+        }
+        return -1;
     }
 
     @Override
@@ -62,37 +90,24 @@ public class WebServiceUserMAO extends WebServiceGenericMAO<User, Long> implemen
         Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.put(Entity.entity(user, MediaType.APPLICATION_JSON));
 
-        System.out.println("updateUser status : " + response.getStatus());
-        System.out.println("updateUser response : " + response.readEntity(User.class));
+        debug("updateUser status : " + response.getStatus());
+        debug("updateUser response : " + response.readEntity(User.class));
         return -1;
     }
 
     @Override
     public long delete(User user) {
         Client client = ClientBuilder.newClient( new ClientConfig());
-        System.out.println("deleteUser user : " + user);
+        debug("wsc user deleting : " + user);
 
         WebTarget webTarget = client.target(targetUrl).path("users").path(user.getId().toString());
 
         Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.delete();
 
-        System.out.println("deleteUser status : " + response.getStatus());
-        System.out.println("deleteUser response : " + response.readEntity(String.class));
+        debug("wsc user delete : status = " + response.getStatus());
+        debug("wsc user delete : resp = " + response.readEntity(String.class));
         return -1;
-    }
-
-    @Override
-    public User getByEmail(String email) {
-        Client client = ClientBuilder.newClient( new ClientConfig());
-        WebTarget webTarget = client.target(targetUrl).path("users").path("email").path(email);
-        //WebTarget helloworldWebTargetWithQueryParam =                webTarget.queryParam("greeting", "Hi World!");
-        Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
-        Response resp = invocationBuilder.get();
-        User user = resp.readEntity(User.class);
-        System.out.println("user status:" + resp.getStatus());
-        System.out.println("user:" + user);
-        return user;
     }
 
 }

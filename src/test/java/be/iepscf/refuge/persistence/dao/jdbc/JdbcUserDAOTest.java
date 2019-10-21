@@ -18,7 +18,6 @@ class JdbcUserDAOTest extends BaseTest {
     void save() {
         User item = createUser();
         JdbcUserDAO dao = new JdbcUserDAO();
-        System.out.println(item);
         long lastInsertId = dao.save(item);
         assertTrue(lastInsertId > 0 );
         assertEquals(item.getId(), lastInsertId);

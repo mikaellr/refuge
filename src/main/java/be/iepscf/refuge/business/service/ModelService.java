@@ -23,7 +23,7 @@ public class ModelService {
 
 
     public MAOFactory getMAOFactory() {
-        return getCrossTierJpaMAOFactory();
+        return getWebserviceMAOFactory();
     }
 
     public MAOFactory getCrossTierJpaMAOFactory() {
@@ -52,27 +52,27 @@ public class ModelService {
     }
 
     public RoleMAO getRoleMAO() {
-        return getMAOFactory().getRoleMAO();
+        return getCrossTierJpaMAOFactory().getRoleMAO();
     }
 
     public AnimalMAO getAnimalMAO() {
-        return getMAOFactory().getAnimalMAO();
+        return getCrossTierJpaMAOFactory().getAnimalMAO();
     }
 
     public SpeciesMAO getSpeciesMAO() {
-        return getMAOFactory().getSpeciesMAO();
+        return getCrossTierJpaMAOFactory().getSpeciesMAO();
     }
 
     public RaceMAO getRaceMAO() {
-        return getMAOFactory().getRaceMAO();
+        return getCrossTierJpaMAOFactory().getRaceMAO();
     }
 
     public ColorMAO getColorMAO() {
-        return getMAOFactory().getColorMAO();
+        return getCrossTierJpaMAOFactory().getColorMAO();
     }
 
     public ContactRequestMAO getContactRequestMAO() {
-        return getMAOFactory().getContactRequestMAO();
+        return getCrossTierJpaMAOFactory().getContactRequestMAO();
     }
 
 

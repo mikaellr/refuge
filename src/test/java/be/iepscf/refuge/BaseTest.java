@@ -1,9 +1,11 @@
 package be.iepscf.refuge;
 
+import be.iepscf.refuge.business.servlet.util.Logger;
 import be.iepscf.refuge.persistence.entitybean.*;
 import be.iepscf.refuge.persistence.service.BeanService;
 
 import javax.management.MBeanServer;
+import javax.sound.midi.Soundbank;
 import java.util.Date;
 
 public class BaseTest {
@@ -11,9 +13,17 @@ public class BaseTest {
     BeanService beanService = new BeanService();
     Role employeRole;
 
+
+    public void debug(String msg) {
+        Logger.getLogger().debug(msg);
+    }
+
     protected BeanService getBeanService() {
         return beanService;
     }
+
+
+
 
     protected Role getEmployeRole() {
         if (employeRole == null) {

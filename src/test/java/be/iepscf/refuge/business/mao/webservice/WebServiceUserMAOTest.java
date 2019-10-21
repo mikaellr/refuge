@@ -1,5 +1,6 @@
 package be.iepscf.refuge.business.mao.webservice;
 
+import be.iepscf.refuge.BaseTest;
 import be.iepscf.refuge.business.businessbean.Role;
 import be.iepscf.refuge.business.businessbean.User;
 import be.iepscf.refuge.business.util.PasswordManager;
@@ -10,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WebServiceUserMAOTest {
+class WebServiceUserMAOTest extends BaseTest {
 
     protected User createBusinessUser() {
         PasswordManager pm = new PasswordManager();
@@ -31,6 +32,14 @@ class WebServiceUserMAOTest {
         User item = mao.getByEmail(email);
         assertTrue(item instanceof  User);
         assertEquals(item.getEmail(), email);
+    }
+
+    @Test
+    void getByEmailNonExisting() {
+        WebServiceUserMAO mao = new WebServiceUserMAO();
+        String email = "laura.xywtf.lorapa@gmail.com";
+        User item = mao.getByEmail(email);
+        assertNull(item);
     }
 
     @Test
@@ -79,8 +88,10 @@ class WebServiceUserMAOTest {
     void delete() {
         User item = createBusinessUser();
         WebServiceUserMAO mao = new WebServiceUserMAO();
-        mao.save(item);
+        Long idd = mao.save(item);
         Long id = item.getId();
+        debug("test user delete save id:" +id);
+        debug("test user delete save idd:" +idd);
         assertTrue(id != null);
         mao.delete(item);
         User item2 = mao.get(id);

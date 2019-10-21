@@ -2,6 +2,7 @@ package be.iepscf.refuge.business.mao.webservice;
 
 import be.iepscf.refuge.business.businessbean.User;
 import be.iepscf.refuge.business.mao.GenericMAO;
+import be.iepscf.refuge.business.servlet.util.Logger;
 import org.glassfish.jersey.client.ClientConfig;
 
 import javax.ws.rs.client.Client;
@@ -44,7 +45,9 @@ public abstract class WebServiceGenericMAO<E, ID extends Serializable> implement
     }
 
 
-
+    protected void debug(String msg) {
+        Logger.getLogger().debug(msg);
+    }
 
 
 
@@ -57,7 +60,7 @@ public abstract class WebServiceGenericMAO<E, ID extends Serializable> implement
 
     protected WebTarget getEntityWebTarget() {
         if (entityUrl == null || entityUrl.equals("")){
-            System.out.println("warning : entityUrl not set");
+            debug("warning : entityUrl not set");
         }
         return getWebTarget().path(entityUrl);
     }
@@ -91,22 +94,20 @@ public abstract class WebServiceGenericMAO<E, ID extends Serializable> implement
 
     @Override
     public long save(E entity) {
-
-
         System.err.println(String.format("Not implemented method in %s derived class", getClass().getName()));
-        return 0;
+        return -1;
     }
 
     @Override
     public long update(E entity) {
         System.err.println(String.format("Not implemented method in %s derived class", getClass().getName()));
-        return 0;
+        return -1;
     }
 
     @Override
     public long delete(E entity) {
         System.err.println(String.format("Not implemented method in %s derived class", getClass().getName()));
-        return 0;
+        return -1;
     }
 
 }

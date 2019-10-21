@@ -33,9 +33,9 @@ public class UserResource extends BaseResource {
         if(user.getEmail() == null) {
             return Response.status(400).entity("Please provide the email !!").build();
         }
-        System.out.println("user received by api for saving:" + user);
+        debug("user received by api for saving:" + user);
         getBeanService().saveUser(user);
-        System.out.println("user saved" + user);
+        debug("user saved" + user);
 
         return Response.status(200).entity(Long.valueOf(user.getId())).build();
         //return Response.created(new URI("/rest/user/" + user.getId())).build();
@@ -63,7 +63,7 @@ public class UserResource extends BaseResource {
         if (user.getEmail() == null) {
             return Response.status(400).entity("Please provide the email !!").build();
         }
-        System.out.println("user received by api for updating:" + user);
+        debug("user received by api for updating:" + user);
         getBeanService().updateUser(user);
         return Response.ok().entity(user).build();
     }
@@ -73,9 +73,14 @@ public class UserResource extends BaseResource {
     public Response delete(@PathParam("id") Long id)
     {
         User user = getBeanService().getUser(id);
+        debug("wss user delete : received for deletion : " +user);
         if (user != null) {
             Long aff = getBeanService().deleteUser(user);
+
+            debug("wss user delete : returning : " + aff);
             return Response.status(202).entity("user delete affected rows : " + aff).build();
+        } else {
+            debug("wss user delete : no user");
         }
         return Response.status(400).entity("User to delete not found").build();
     }
@@ -83,7 +88,7 @@ public class UserResource extends BaseResource {
     @GET
     @Path("/email/{email}")
     public Response get(@PathParam("email") String email) {
-        System.out.println("query by email:"+email);
+        debug("query by email:"+email);
         User user = getBeanService().getUserByEmail(email);
         if (user != null) {
             return Response.status(200).entity(user).build();
