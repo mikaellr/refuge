@@ -1,11 +1,9 @@
 package be.iepscf.refuge;
 
-import be.iepscf.refuge.business.servlet.util.Logger;
+import be.iepscf.refuge.business.util.Logger;
 import be.iepscf.refuge.persistence.entitybean.*;
 import be.iepscf.refuge.persistence.service.BeanService;
 
-import javax.management.MBeanServer;
-import javax.sound.midi.Soundbank;
 import java.util.Date;
 
 public class BaseTest {

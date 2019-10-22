@@ -37,4 +37,9 @@ public class CrossTierJpaContactRequestMAO extends CrossTierJpaGenericMAO<Contac
     public List<ContactRequest> getByAnimal(Animal animal) {
         return convContactRequests(getBeanService().getContactRequestsByAnimal(conv(animal)));
     }
+
+    @Override
+    public List<ContactRequest> getByAnimal(Long id) {
+        return null;
+    }
 }

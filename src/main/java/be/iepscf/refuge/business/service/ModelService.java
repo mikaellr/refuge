@@ -22,19 +22,19 @@ public class ModelService {
 
 
 
-    public MAOFactory getMAOFactory() {
+    protected MAOFactory getMAOFactory() {
         return getWebserviceMAOFactory();
     }
 
-    public MAOFactory getCrossTierJpaMAOFactory() {
-
-        if (crossTierJpaMAOFactory == null) {
-            crossTierJpaMAOFactory = new CrossTierJpaMAOFactory();
-        }
-        return crossTierJpaMAOFactory;
+    protected MAOFactory getCrossTierJpaMAOFactory() {
+        throw new RuntimeException("Ça, tu ne peux pas.");
+//        if (crossTierJpaMAOFactory == null) {
+//            crossTierJpaMAOFactory = new CrossTierJpaMAOFactory();
+//        }
+//        return crossTierJpaMAOFactory;
     }
 
-    public MAOFactory getWebserviceMAOFactory() {
+    protected MAOFactory getWebserviceMAOFactory() {
         if (webserviceMAOFactory == null) {
             webserviceMAOFactory = new WebServiceMAOFactory();
         }
@@ -47,32 +47,32 @@ public class ModelService {
 
 
 
-    public UserMAO getUserMao() {
+    protected UserMAO getUserMao() {
         return getMAOFactory().getUserMAO();
     }
 
-    public RoleMAO getRoleMAO() {
-        return getCrossTierJpaMAOFactory().getRoleMAO();
+    protected RoleMAO getRoleMAO() {
+        return getMAOFactory().getRoleMAO();
     }
 
-    public AnimalMAO getAnimalMAO() {
-        return getCrossTierJpaMAOFactory().getAnimalMAO();
+    protected AnimalMAO getAnimalMAO() {
+        return getMAOFactory().getAnimalMAO();
     }
 
-    public SpeciesMAO getSpeciesMAO() {
-        return getCrossTierJpaMAOFactory().getSpeciesMAO();
+    protected SpeciesMAO getSpeciesMAO() {
+        return getMAOFactory().getSpeciesMAO();
     }
 
-    public RaceMAO getRaceMAO() {
-        return getCrossTierJpaMAOFactory().getRaceMAO();
+    protected RaceMAO getRaceMAO() {
+        return getMAOFactory().getRaceMAO();
     }
 
-    public ColorMAO getColorMAO() {
-        return getCrossTierJpaMAOFactory().getColorMAO();
+    protected ColorMAO getColorMAO() {
+        return getMAOFactory().getColorMAO();
     }
 
-    public ContactRequestMAO getContactRequestMAO() {
-        return getCrossTierJpaMAOFactory().getContactRequestMAO();
+    protected ContactRequestMAO getContactRequestMAO() {
+        return getMAOFactory().getContactRequestMAO();
     }
 
 

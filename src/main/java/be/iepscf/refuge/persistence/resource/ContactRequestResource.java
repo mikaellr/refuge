@@ -1,6 +1,7 @@
 package be.iepscf.refuge.persistence.resource;
 
 
+import be.iepscf.refuge.persistence.entitybean.Animal;
 import be.iepscf.refuge.persistence.entitybean.ContactRequest;
 
 import javax.ws.rs.*;
@@ -41,7 +42,7 @@ public class ContactRequestResource extends BaseResource {
     public Response get(@PathParam("id") Long id) {
         ContactRequest user = getBeanService().getContactRequest(id);
         if (user == null) {
-            notFound();
+            return notFound();
         }
         return Response.status(200).entity(user).build();
     }
@@ -67,7 +68,7 @@ public class ContactRequestResource extends BaseResource {
     {
         ContactRequest user = getBeanService().getContactRequest(id);
         if (user == null) {
-            notFound();
+            return notFound();
         }
         getBeanService().deleteContactRequest(user);
         return Response.status(202).entity("Employee deleted successfully !!").build();

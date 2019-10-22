@@ -1,5 +1,6 @@
 package be.iepscf.refuge.persistence.dao.jdbc;
 
+import be.iepscf.refuge.business.util.Logger;
 import be.iepscf.refuge.persistence.entitybean.Animal;
 import be.iepscf.refuge.persistence.dao.AnimalDAO;
 import be.iepscf.refuge.persistence.entitybean.Color;
@@ -341,9 +342,11 @@ public class JdbcAnimalDAO extends JdbcGenericDAO<Animal, Long> implements Anima
         String orderClause = last ? " ORDER BY id DESC" : " ORDER BY id ASC";
         String limitClause = all ? "" : String.format(" LIMIT %d, %d", offset, limit);
 
-        String sql = SELECT + whereClause + orderClause + limitClause;
+        String fullWhereClause = whereClause + orderClause + limitClause;
+        String sql = SELECT + fullWhereClause;
 
-        System.out.println("findQuery sql = " + sql);
+        Logger.getLogger().debug("JdbcAnimalDAO findQuery : fullWhereClause = " + fullWhereClause);
+        Logger.getLogger().debug("JdbcAnimalDAO findQuery : sql = " + sql);
 
 
         List<Animal> animals = new ArrayList<>();

@@ -34,8 +34,20 @@ public class SpeciesResource extends BaseResource {
     }
 
     @GET
+    @Path("/name/{name}")
+    public Response oneName(@PathParam("name") String name) {
+        Species item = getBeanService().getSpeciesByName(name);
+        debug(""+item);
+        if (item == null) {
+            notFound();
+        }
+        return Response.status(200).entity(item).build();
+    }
+
+    @GET
     @Path("/{id}/races")
     public Response racesBySpecies(@PathParam("id") Long id) {
+        debug("wss species : /species/" + id + "/races");
         List<Race> result = getBeanService().getRacesBySpecies(id);
         return Response.status(200).entity(result).build();
     }

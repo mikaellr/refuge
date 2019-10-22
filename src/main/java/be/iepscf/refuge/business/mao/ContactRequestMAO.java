@@ -9,4 +9,6 @@ public interface ContactRequestMAO extends GenericMAO<ContactRequest, Long>{
 
     public List<ContactRequest> getByAnimal(Animal animal);
 
+    public List<ContactRequest> getByAnimal(Long id);
+
 }

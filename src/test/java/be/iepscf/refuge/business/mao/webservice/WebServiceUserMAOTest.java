@@ -52,7 +52,7 @@ class WebServiceUserMAOTest extends BaseTest {
     }
 
     @Test
-    void testGets() {
+    void getAll() {
         WebServiceUserMAO mao = new WebServiceUserMAO();
         List<User> items = mao.get();
         assertTrue(items.size() > 0);

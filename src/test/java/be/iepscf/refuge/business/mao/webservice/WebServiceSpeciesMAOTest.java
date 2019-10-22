@@ -9,14 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WebServiceSpeciesMAOTest {
 
-    void getByName() {
-        String name = "Chien";
-        WebServiceSpeciesMAO mao = new WebServiceSpeciesMAO();
-        Species item = mao.get(name);
-        assertTrue(item instanceof Species);
-        assertEquals(item.getName(), name);
-    }
-
     @Test
     void get() {
         Long id = 2L;
@@ -27,7 +19,7 @@ class WebServiceSpeciesMAOTest {
     }
 
     @Test
-    void testGet() {
+    void getAll() {
         WebServiceSpeciesMAO mao = new WebServiceSpeciesMAO();
         List<Species> items = mao.get();
         assertTrue(items.size() > 0);
@@ -35,4 +27,14 @@ class WebServiceSpeciesMAOTest {
             assertTrue(item instanceof Species);
         }
     }
+
+    @Test
+    void getByName() {
+        String name = "Chien";
+        WebServiceSpeciesMAO mao = new WebServiceSpeciesMAO();
+        Species item = mao.get(name);
+        assertTrue(item instanceof Species);
+        assertEquals(item.getName(), name);
+    }
+
 }

@@ -3,6 +3,7 @@ package be.iepscf.refuge.business.servlet;
 import be.iepscf.refuge.business.businessbean.Animal;
 import be.iepscf.refuge.business.businessbean.Race;
 import be.iepscf.refuge.business.businessbean.Species;
+import be.iepscf.refuge.business.util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,13 +29,13 @@ public class AnimalsServlet extends PublicServlet {
 		Boolean last = getBooleanParameter(request, "last");
 		Boolean adoptable = getBooleanParameter(request, "adoptable");
 		Boolean all = getBooleanParameter(request, "all");
-        System.out.println("Paramètres AnimalsServlet :");
-		System.out.println("species=" + species);
-		System.out.println("race=" + race);
-        System.out.println("limit=" + limit);
-        System.out.println("last=" + last);
-        System.out.println("adoptable=" + adoptable);
-		System.out.println("all=" + all);
+        Logger.getLogger().debug("Paramètres AnimalsServlet :");
+		Logger.getLogger().debug("species=" + species);
+		Logger.getLogger().debug("race=" + race);
+        Logger.getLogger().debug("limit=" + limit);
+        Logger.getLogger().debug("last=" + last);
+        Logger.getLogger().debug("adoptable=" + adoptable);
+		Logger.getLogger().debug("all=" + all);
 		List<Animal> animals = getPublicService().getAnimalsQuery(species, race, offset, limit, last, adoptable, all);
 		request.setAttribute("animals", animals);
 

@@ -1,6 +1,6 @@
 package be.iepscf.refuge.persistence.resource;
 
-import be.iepscf.refuge.business.servlet.util.Logger;
+import be.iepscf.refuge.business.util.Logger;
 import be.iepscf.refuge.persistence.service.BeanService;
 
 import javax.ws.rs.core.Response;

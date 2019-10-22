@@ -15,7 +15,6 @@ import java.util.List;
 public class RacesResource extends BaseResource {
 
     @GET
-    @Path("")
     public Response all() {
         List<Race> items = getBeanService().getRaces();
         return Response.status(200).entity(items).build();

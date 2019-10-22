@@ -1,6 +1,7 @@
 package be.iepscf.refuge.business.servlet.util;
 
 import be.iepscf.refuge.business.businessbean.User;
+import be.iepscf.refuge.business.util.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

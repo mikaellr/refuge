@@ -19,7 +19,7 @@ class WebServiceRoleMAOTest {
     }
 
     @Test
-    void testGet() {
+    void getAll() {
         WebServiceRoleMAO mao = new WebServiceRoleMAO();
         List<Role> items = mao.get();
         assertTrue(items.size() > 0);

@@ -1,7 +1,7 @@
 package be.iepscf.refuge.business.servlet;
 
 import be.iepscf.refuge.business.businessbean.User;
-import be.iepscf.refuge.business.servlet.util.Logger;
+import be.iepscf.refuge.business.util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

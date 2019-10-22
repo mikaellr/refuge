@@ -8,8 +8,7 @@ import java.io.IOException;
 
 import be.iepscf.refuge.business.businessbean.Animal;
 import be.iepscf.refuge.business.businessbean.ContactRequest;
-import be.iepscf.refuge.business.service.GestionService;
-import be.iepscf.refuge.business.servlet.util.Logger;
+import be.iepscf.refuge.business.util.Logger;
 
 
 @WebServlet("/contact-request")

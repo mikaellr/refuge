@@ -23,6 +23,16 @@ public class ColorsResource extends BaseResource {
     }
 
     @GET
+    @Path("/name/{name}")
+    public Response byName(@PathParam("name") String name) {
+        Color item = getBeanService().getColorByName(name);
+        if (item == null) {
+            return notFound();
+        }
+        return Response.status(200).entity(item).build();
+    }
+
+    @GET
     @Path("/{id}")
     public Response one(@PathParam("id") Long id) {
         Color item = getBeanService().getColor(id);

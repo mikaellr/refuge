@@ -171,7 +171,7 @@ public class JdbcContactRequestDAO extends JdbcGenericDAO<ContactRequest, Long> 
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ANIMAL);
             preparedStatement.setLong(1, animal.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 ContactRequest item = fetch(resultSet);
                 items.add(item);
             }

@@ -3,8 +3,7 @@ package be.iepscf.refuge.business.servlet;
 import be.iepscf.refuge.business.businessbean.*;
 import be.iepscf.refuge.business.service.PublicService;
 import be.iepscf.refuge.business.service.ServiceFactory;
-import be.iepscf.refuge.business.servlet.util.Logger;
-import org.hibernate.Session;
+import be.iepscf.refuge.business.util.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,14 +28,9 @@ import java.nio.charset.StandardCharsets;
 @WebServlet(name = "PublicServlet")
 public abstract class PublicServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    public void debug(String msg) {
+        Logger.getLogger().debug(msg);
     }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
 
     public User getUser(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
@@ -81,7 +75,12 @@ public abstract class PublicServlet extends HttpServlet {
     protected Long getLongParameter(HttpServletRequest request, String name, Long defval) {
         String param = request.getParameter(name);
         if (param != null) {
-            return Long.parseLong(param);
+            try {
+                return Long.parseLong(param);
+            } catch( NumberFormatException e) {
+                debug(String.format("NumberFormatException catched for parameter '%s', returning default : %d.", name, defval));
+                return defval;
+            }
         }
         return defval;
     }
@@ -111,19 +110,11 @@ public abstract class PublicServlet extends HttpServlet {
     }
 
     protected Species getSpeciesParameter(HttpServletRequest request, String name) {
-        String idSpecies = request.getParameter(name);
-        if (idSpecies != null) {
-            Long id;
-            try {
-                id = Long.parseLong(idSpecies);
-            } catch (NumberFormatException e) {
-                id = null;
-            }
-            if (id != null && id != 0) {
-                Species species = getPublicService().getSpecies(id);
-                if (species != null) {
-                    return species;
-                }
+        Long id = getLongParameter(request, name);
+        if (id != null && id > 0) {
+            Species species = getPublicService().getSpecies(id);
+            if (species != null) {
+                return species;
             }
         }
         return null;
@@ -134,19 +125,11 @@ public abstract class PublicServlet extends HttpServlet {
     }
 
     protected Race getRaceParameter(HttpServletRequest request, String name) {
-        String idRace = request.getParameter(name);
-        if (idRace != null) {
-            Long id;
-            try {
-                id = Long.parseLong(idRace);
-            } catch (NumberFormatException e) {
-                id = null;
-            }
-            if (id != null && id != 0) {
-                Race race = getPublicService().getRace(id);
-                if (race != null) {
-                    return race;
-                }
+        Long id = getLongParameter(request, name);
+        if (id != null && id > 0) {
+            Race race = getPublicService().getRace(id);
+            if (race != null) {
+                return race;
             }
         }
         return null;
@@ -158,19 +141,11 @@ public abstract class PublicServlet extends HttpServlet {
 
 
     protected Animal getAnimalParameter(HttpServletRequest request, String name) {
-        String idAnimal = request.getParameter(name);
-        if (idAnimal != null) {
-            Long id;
-            try {
-                id = Long.parseLong(idAnimal);
-            } catch (NumberFormatException e) {
-                id = null;
-            }
-            if (id != null && id != 0) {
-                Animal item = getPublicService().getAnimal(id);
-                if (item != null) {
-                    return item;
-                }
+        Long id = getLongParameter(request, name);
+        if (id != null && id > 0) {
+            Animal item = getPublicService().getAnimal(id);
+            if (item != null) {
+                return item;
             }
         }
         return null;

@@ -1,4 +1,4 @@
-package be.iepscf.refuge.business.servlet.util;
+package be.iepscf.refuge.business.util;
 
 public class Logger {
 

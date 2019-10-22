@@ -12,6 +12,11 @@ import java.util.List;
 
 public class WebServiceUserMAO extends WebServiceGenericMAO<User, Long> implements UserMAO {
 
+
+    public WebServiceUserMAO() {
+        entityUrl = "usesr";
+    }
+
     @Override
     public List<User> get()  {
         debug("retrieving list of user by ws");
