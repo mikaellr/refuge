@@ -159,6 +159,15 @@ public class GestionService extends PublicService {
 		return contactRequest;
 	}
 
+	public ContactRequest updateContactRequestTreated(Long id, boolean treated){
+		ContactRequest cr = getContactRequest(id);
+		cr.setTreated(treated);
+		long affectedRows = getModelService().updateContactRequest(cr);
+		return cr;
+	}
+
+
+
 	public ContactRequest getContactRequest(Long id) {
 		return getModelService().getContactRequest(id);
 	}

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "ContactRequestServlet", urlPatterns = {"/gestion/contact-request"})
-//@WebServlet("/gestion/contact-requests")
 public class ContactRequestServlet extends GestionServlet {
 
     /**
@@ -19,14 +18,13 @@ public class ContactRequestServlet extends GestionServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id=getLongParameter(request,"id");
-        ContactRequest contactRequest= getGestionService().getContactRequests(id);
-        if (contactRequest==null){
-            send404(request,response,String.format("Contact requestnumber # not found",id));
+        ContactRequest item = getContactRequestParameter(request, "id");
+        if (item == null) {
+            send404(request,response, "Contact request number not found");
             return;
-            }
-        request.setAttribute("item",contactRequest);
-        request.getRequestDispatcher("WEB-INF/jsp/gestion/contact-request.jsp").forward(request, response);
+        }
+        request.setAttribute("item", item);
+        request.getRequestDispatcher("/WEB-INF/jsp/gestion/contact-request.jsp").forward(request, response);
 
     }
 
@@ -36,14 +34,11 @@ public class ContactRequestServlet extends GestionServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = getLongParameter(request, "id");
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String message= request.getParameter("message");
-        boolean treated= Boolean.parseBoolean(request.getParameter("treated"));
-        ContactRequest contactRequest = getGestionService().updateContactRequest(id, firstName, lastName, email, phone, message, treated);
-        sendRedirect(response, "/gestion/contact-request");
+        Boolean treated = getBooleanParameter(request, "treated", true);
+        if (id != null && id > 0 && treated != null) {
+            ContactRequest cr = getGestionService().updateContactRequestTreated(id, treated);
+        }
+        sendRedirect(response, "/gestion/contact-requests");
     }
 
 }

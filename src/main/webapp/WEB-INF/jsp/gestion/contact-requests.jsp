@@ -1,16 +1,28 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: FredOhm0603
-  Date: 19-10-19
-  Time: 11:15
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>contact-requests</title>
-</head>
-<body>
 
-</body>
-</html>
+
+<h2>${contactRequests.size()} demandes de contact</h2>
+
+<table>
+    <thead>
+    <th>id</th>
+    <th>firstName</th>
+    <th>lastName</th>
+    <th>date</th>
+    <th>treated</th>
+    <th>animal</th>
+    <th>action</th>
+    </thead>
+    <tbody>
+    <c:forEach items="${contactRequests}" var="item">
+        <tr>
+            <td>${item.id}</td>
+            <td>${item.firstName}</td>
+            <td>${item.lastName}</td>
+            <td>${item.date}</td>
+            <td>${item.treated}</td>
+            <td>${item.animal.name}</td>
+            <td><a href="<c:url value="/gestion/contact-request?id=${item.id}"/>"">edit</a></td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>

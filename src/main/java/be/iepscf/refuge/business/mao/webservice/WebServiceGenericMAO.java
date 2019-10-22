@@ -78,6 +78,7 @@ public abstract class WebServiceGenericMAO<E, ID extends Serializable> implement
      */
     @Override
     public E get(ID id) {
+        debug("wsc generic get : id = " + id);
         Response resp = getEntityWebTarget().path(id.toString()).request(MediaType.APPLICATION_JSON).get();
         if (resp.getStatus() == 200) {
             E item = resp.readEntity(getEntityClass());
