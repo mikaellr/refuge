@@ -6,6 +6,7 @@
     <th>id</th>
     <th>nom</th>
     <th>année naissance</th>
+    <th>sexe</th>
     <th>stérilisé</th>
     <th>adoptable</th>
     <th>espèce</th>
@@ -18,6 +19,7 @@
         <td>${item.id}</td>
         <td>${item.name}</td>
         <td>${item.birthYear}</td>
+        <td>${item.sex}</td>
         <td>${item.sterilized}</td>
         <td>${item.adoptable}</td>
         <td>${item.species.name}</td>

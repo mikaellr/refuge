@@ -25,7 +25,6 @@ public class ContactRequestServlet extends GestionServlet {
         }
         request.setAttribute("item", item);
         request.getRequestDispatcher("/WEB-INF/jsp/gestion/contact-request.jsp").forward(request, response);
-
     }
 
     /**

@@ -36,9 +36,6 @@ public class RacesServlet extends PublicServlet {
 			Long id = Long.parseLong(idString);
 			Species species = getPublicService().getSpecies(id);
 			List<Race> races = getPublicService().getRacesBySpecies(species);
-
-			for (Race item : races ) System.out.println(item);
-			System.out.println(races.size());
 			Gson gson = new Gson();
 			String json = gson.toJson(races);
 			response.setContentType("application/json");

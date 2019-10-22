@@ -1,5 +1,7 @@
 package be.iepscf.refuge.business.service;
 import be.iepscf.refuge.business.businessbean.*;
+import be.iepscf.refuge.business.servlet.exception.InvalidRequestException;
+import be.iepscf.refuge.business.servlet.exception.RegisteredEmailException;
 import be.iepscf.refuge.business.servlet.exception.UnconfirmedPasswordException;
 import be.iepscf.refuge.business.util.PasswordManager;
 
@@ -34,15 +36,30 @@ public class GestionService extends PublicService {
 		return getModelService().getUsers();
 	}
 
-	public User addUser(String firstName, String lastName, String email, String phone, String password, String confirm) throws UnconfirmedPasswordException {
+	public User addUser(String firstName, String lastName, String email, String phone, String password, String confirm) throws InvalidRequestException {
 		Role employe = getRole(1L);
 		User user = new User(null, firstName, lastName, email, phone, null, null, true, employe);
+
+		if (email == null || email.trim().equals("")) {
+			throw new InvalidRequestException();
+		}
+
+		if (password == null || password.trim().equals("")) {
+			throw new InvalidRequestException();
+		}
+
 		password = password.trim();
 		confirm = confirm.trim();
-		// + verif nulls etc
+
 		if (! password.equals(confirm)) {
 			throw new UnconfirmedPasswordException();
 		}
+
+		User other = getModelService().getUserByEmail(email);
+		if (other != null) {
+			throw new RegisteredEmailException();
+		}
+
 		getPasswordManager().setUserPassword(user, password);
 		long lastInsertId = getModelService().saveUser(user);
 		return user;

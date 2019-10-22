@@ -1,4 +1,4 @@
 package be.iepscf.refuge.business.servlet.exception;
 
-public class UnconfirmedPasswordException extends Exception {
+public class UnconfirmedPasswordException extends InvalidRequestException {
 }

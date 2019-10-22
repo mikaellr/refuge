@@ -32,7 +32,6 @@ public abstract class JdbcGenericDAO<E, ID extends Serializable> implements Gene
 	public JdbcGenericDAO() {
 		beanClass = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 		idClass = (Class<ID>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
-		//System.out.println(String.format("mapping %s => %s", beanClass, idClass));
 	}
 
 
